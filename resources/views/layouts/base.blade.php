@@ -42,8 +42,6 @@
 						</div>
 						<div class="topbar-menu right-menu">
 							<ul>
-								<li class="menu-item" ><a title="Register or Login" href="login.html">Login</a></li>
-								<li class="menu-item" ><a title="Register or Login" href="register.html">Register</a></li>
 								<li class="menu-item lang-menu menu-item-has-children parent">
 									<a title="English" href="#"><span class="img label-before"><img src="{{asset('assets/images/lang-en.png')}}" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
 									<ul class="submenu lang" >
@@ -67,6 +65,45 @@
 										</li>
 									</ul>
 								</li>
+								@if (Route::has('login'))
+								@auth
+									@if(Auth::user()->role == 'admin')
+										<li class="menu-item menu-item-has-children parent" >
+											<a title="My Account( {{Auth::user()->name}} ) Admin" href="#">My Account( {{Auth::user()->name}} )<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+											<ul class="submenu curency" >
+												<li class="menu-item" >
+													<a title="Dashboard" href="{{route('admin.dashboard')}}">Dashboard</a>
+												</li>
+												<form method="POST" action="{{ route('logout') }}" x-data>
+													<li class="menu-item" >
+														@csrf
+														<a title="logout" href="{{ route('logout') }}" onclick="event.preventDefault();closest('form').submit();">{{ __('Log Out') }}</a>
+													</li>
+												</form>
+											</ul>
+										</li>
+									@else
+										<li class="menu-item menu-item-has-children parent" >
+											<a title="My Account( {{Auth::user()->name}} ) User" href="#">My Account( {{Auth::user()->name}} )<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+											<ul class="submenu curency" >
+												<li class="menu-item" >
+													<a title="Dashboard" href="{{route('user.dashboard')}}">Dashboard</a>
+												</li>
+												<form method="POST" action="{{ route('logout') }}" x-data>
+													<li class="menu-item" >
+														@csrf
+														<a title="logout" href="{{ route('logout') }}" onclick="event.preventDefault();closest('form').submit();">{{ __('Log Out') }}</a>
+													</li>
+												</form>
+											</ul>
+										</li>
+									@endif
+								@else
+									<li class="menu-item" ><a title="Register or Login" href="{{route('login')}}">Login</a></li>
+									<li class="menu-item" ><a title="Register or Login" href="{{route('register')}}">Register</a></li>
+								@endauth
+								
+							@endif
 							</ul>
 						</div>
 					</div>
