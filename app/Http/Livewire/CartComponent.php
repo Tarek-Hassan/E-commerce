@@ -3,11 +3,15 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
+use App\Models\Product;
 
 class CartComponent extends Component
 {
     public function render()
     {
-        return view('livewire.cart-component')->layout('layouts.base');
+        $most_viewed_product=Product::inRandomOrder()->limit(8)->get();
+        return view('livewire.cart-component',[
+            'items'=>$most_viewed_product
+        ])->layout('layouts.base');
     }
 }
