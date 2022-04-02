@@ -26,12 +26,12 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::get('/',HomeComponent::class);
-Route::get('/cart',CartComponent::class);
-Route::get('/checkout',CheckoutComponent::class);
-Route::get('/shop',ShopComponent::class);
+Route::get('/cart',CartComponent::class)->name('product.cart');
+Route::get('/checkout',CheckoutComponent::class)->name('product.checkout');
+Route::get('/shop',ShopComponent::class)->name('product.shop');
+Route::get('/product/{slug}',DetailsComponet::class)->name('product.detail');
 Route::get('/about-us',AboutUsComponent::class);
 Route::get('/contact-us',ContactUsComponent::class);
-Route::get('/product/{slug}',DetailsComponet::class)->name('product.detail');
 // Route::middleware([
 //     'auth:sanctum',
 //     config('jetstream.auth_session'),
