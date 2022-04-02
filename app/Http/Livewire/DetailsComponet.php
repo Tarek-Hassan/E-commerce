@@ -18,7 +18,7 @@ class DetailsComponet extends Component
       
         $product=Product::where('slug',$this->slug)->first();
         $popular_product=Product::inRandomOrder()->limit(4)->get(); 
-        $related_product=Product::where('category_id',$product->category_id)->get(); 
+        $related_product=Product::where('category_id',$product->category_id)->inRandomOrder()->limit(6)->get(); 
         return view('livewire.details-componet',[
                     'item'=>$product,
                     'popular_product'=>$popular_product,
