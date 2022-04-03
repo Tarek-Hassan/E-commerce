@@ -23,9 +23,14 @@ class CartComponent extends Component
         Cart::update($rowId,$qty);
     }
 
-    public function destroy($rowId){
+    public function removeItem($rowId){
         Cart::remove($rowId);
         session()->flash("success_message",'Item Deleted Successfully');
+    }
+
+    public function destroy(){
+        Cart::destroy();
+        session()->flash("success_message",'Shopping Cart is Clear Successfully');
     }
 
     public function render()
