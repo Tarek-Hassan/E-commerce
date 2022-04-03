@@ -23,7 +23,7 @@
 						<h3 class="box-title">Products Name</h3>
 						<ul class="products-cart">
 							@forelse (Cart::content() as $item )
-							{{-- {{dd($item->model)}} --}}
+							
 								<li class="pr-cart-item">
 									<div class="product-image">
 										<figure><img src="{{asset('assets/images/products/'.$item->model->image)}}" alt="{{$item->model->name}}"></figure>
@@ -35,13 +35,13 @@
 									<div class="quantity">
 										<div class="quantity-input">
 											<input type="text" name="product-quatity" value="{{$item->qty}}" data-max="{{$item->model->quantity}}" pattern="[0-9]*" >									
-											<a class="btn btn-increase" href="#"></a>
-											<a class="btn btn-reduce" href="#"></a>
+											<a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{$item->rowId}}')"></a>
+											<a class="btn btn-reduce" href="#" wire:click.prevent="reduceQuantity('{{$item->rowId}}')"></a>
 										</div>
 									</div>
 									<div class="price-field sub-total"><p class="price">${{$item->subtotal}}</p></div>
 									<div class="delete">
-										<a href="#" class="btn btn-delete" title="">
+										<a href="#" class="btn btn-delete" title="" wire:click.prevent="destroy('{{$item->rowId}}')">
 											<span>Delete from your cart</span>
 											<i class="fa fa-times-circle" aria-hidden="true"></i>
 										</a>
@@ -73,8 +73,8 @@
 						<a class="link-to-shop" href="shop.html">Continue Shopping<i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
 					</div>
 					<div class="update-clear">
-						<a class="btn btn-clear" href="#">Clear Shopping Cart</a>
-						<a class="btn btn-update" href="#">Update Shopping Cart</a>
+						<a class="btn btn-clear" href="#" >Clear Shopping Cart</a>
+						<a class="btn btn-update" href="#" >Update Shopping Cart</a>
 					</div>
 				</div>
 
