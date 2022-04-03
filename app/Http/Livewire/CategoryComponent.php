@@ -8,32 +8,27 @@ use App\Models\Product;
 use App\Models\Category;
 use Cart;
 
-class ShopComponent extends Component
+class CategoryComponent extends Component
 {
+
     use WithPagination;
     public $sorting;
     public $paginate;
     public $orderBy;
     public $orderType;
+    public $category_slug;
 
-    public function store($id,$name,$price)
-    {
-        Cart::add($id,$name,1,$price)->associate(Product::class);
-        session()->flash('success_message','Item Added to the Cart Successfully');
-        return redirect()->route('product.cart');
+    public function mount($category_slug){
 
-    }
-
-    public function mount(){
         $this->sorting='default';
         $this->paginate=12;
         $this->orderBy='created_at';
         $this->orderType='ASC';
-    }
+        $this->category_slug=$category_slug;
 
+    }
     public function render()
     {
-
         if ($this->sorting == 'date') {
             $this->orderType='DESC';
         }else if ($this->sorting == 'price') {
@@ -43,11 +38,15 @@ class ShopComponent extends Component
             $this->orderType='DESC';
         }
 
-        $Categories=Category::all();
-        
-        return view('livewire.shop-component',[
-            'items' => Product::orderBy($this->orderBy,$this->orderType)->paginate($this->paginate),
-            'Categories' => $Categories,
+        $categories=Category::all();
+        $category=Category::where('slug',$this->category_slug)->first();
+
+
+
+        return view('livewire.category-component',[
+            'items' => Product::where('category_id', $category->id)->orderBy($this->orderBy,$this->orderType)->paginate($this->paginate),
+            'Categories' => $categories,
+            'category_name' => $category->name,
         ])->layout('layouts.base');
     }
 }

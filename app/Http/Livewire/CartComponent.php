@@ -4,9 +4,35 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Product;
+use Cart;
 
 class CartComponent extends Component
 {
+
+
+    public function increaseQuantity($rowId){
+        
+        $product=Cart::get($rowId);
+        $qty=$product->qty +1;
+        Cart::update($rowId,$qty);
+    }
+
+    public function reduceQuantity($rowId){
+        $product=Cart::get($rowId);
+        $qty=$product->qty - 1;
+        Cart::update($rowId,$qty);
+    }
+
+    public function removeItem($rowId){
+        Cart::remove($rowId);
+        session()->flash("success_message",'Item Deleted Successfully');
+    }
+
+    public function destroy(){
+        Cart::destroy();
+        session()->flash("success_message",'Shopping Cart is Clear Successfully');
+    }
+
     public function render()
     {
         $most_viewed_product=Product::inRandomOrder()->limit(8)->get();
