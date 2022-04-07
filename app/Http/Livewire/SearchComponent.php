@@ -27,7 +27,7 @@ class SearchComponent extends Component
         $this->orderBy='created_at';
         $this->orderType='ASC';
 
-        $this->product_cat='All Category';
+        // $this->product_cat='All Category';
         $this->fill(request()->only('search','product_cat','product_cat_id'));
     }
 
@@ -40,6 +40,7 @@ class SearchComponent extends Component
 
     public function render()
     {
+        // dd($this->all());
 
         if ($this->sorting == 'date') {
             $this->orderType='DESC';
@@ -49,14 +50,17 @@ class SearchComponent extends Component
             $this->orderBy='regular_price';
             $this->orderType='DESC';
         }
+    //    dd($this->all(),Product::where('name','like','%'.$this->search.'%')->
+    //    where('category_id','like','%'.$this->product_cat_id.'%')->
+    // orderBy($this->orderBy,$this->orderType)->paginate($this->paginate));
 
         $Categories=Category::all();
 
         return view('livewire.search-component',[
-            'items' => Product::where([
-                        ['name','like','%'.$this->search.'%'],
-                        ['category_id',$this->product_cat_id]
-                    ])->orderBy($this->orderBy,$this->orderType)->paginate($this->paginate),
+            'items' => Product::where('name','like','%'.$this->search.'%')->
+            where('category_id','like','%'.$this->product_cat_id.'%')->
+            // where('category_id',$this->product_cat_id)->
+         orderBy($this->orderBy,$this->orderType)->paginate($this->paginate),
 
             'Categories' => $Categories,
         ])->layout('layouts.base');

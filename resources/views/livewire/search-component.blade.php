@@ -1,10 +1,10 @@
 <div>
     <!--main area-->
- <main id="main" class="main-site left-sidebar">
-
-     <div class="container">
-
-         <div class="wrap-breadcrumb">
+    <main id="main" class="main-site left-sidebar">
+        
+        <div class="container">
+            
+            <div class="wrap-breadcrumb">
              <ul>
                  <li class="item-link"><a href="/" class="link">home</a></li>
                  <li class="item-link"><span>Digital & Electronics</span></li>
@@ -13,20 +13,20 @@
          <div class="row">
 
              <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
-
+                 
                  <div class="banner-shop">
                      <a href="#" class="banner-link">
                          <figure><img src="{{asset('assets/images/shop-banner.jpg')}}" alt=""></figure>
-                     </a>
-                 </div>
-
-                 <div class="wrap-shop-control">
-
-                     <h1 class="shop-title">Digital & Electronics</h1>
-
-                     <div class="wrap-right">
-
-                         <div class="sort-item orderby ">
+                        </a>
+                    </div>
+                    
+                    <div class="wrap-shop-control">
+                        
+                        <h1 class="shop-title">Digital & Electronics</h1>
+                        
+                        <div class="wrap-right">
+                            
+                            <div class="sort-item orderby ">
                              <select name="orderby" class="use-chosen" wire:model="sorting">
                                  <option value="default" selected="selected">Default sorting</option>
                                  {{-- <option value="popularity">Sort by popularity</option>
@@ -34,8 +34,8 @@
                                  <option value="date">Sort by newness</option>
                                  <option value="price">Sort by price: low to high</option>
                                  <option value="price-desc">Sort by price: high to low</option>
-                             </select>
-                         </div>
+                                </select>
+                            </div>
 
                          <div class="sort-item product-per-page">
                              <select name="post-per-page" class="use-chosen" wire:model="paginate">
@@ -47,24 +47,23 @@
                                  <option value="30">30 per page</option>
                                  <option value="32">32 per page</option>
                              </select>
-                         </div>
-
-                         <div class="change-display-mode">
-                             <a href="#" class="grid-mode display-mode active"><i class="fa fa-th"></i>Grid</a>
-                             <a href="list.html" class="list-mode display-mode"><i class="fa fa-th-list"></i>List</a>
-                         </div>
-
+                            </div>
+                            
+                            <div class="change-display-mode">
+                                <a href="#" class="grid-mode display-mode active"><i class="fa fa-th"></i>Grid</a>
+                                <a href="list.html" class="list-mode display-mode"><i class="fa fa-th-list"></i>List</a>
+                            </div>
+                            
                      </div>
 
-                 </div><!--end wrap shop control-->
-                @if (count($items) > 0)                    
+                    </div><!--end wrap shop control-->
                     <div class="row">
 
                         <ul class="product-list grid-products equal-container">
 
                             @forelse ( $items as $item )	
-                                <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
-                                    <div class="product product-style-3 equal-elem ">
+                            <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                                <div class="product product-style-3 equal-elem ">
                                         <div class="product-thumnail">
                                             <a href="{{route('product.detail',['slug'=>$item->slug])}}" title="{{$item->name}}">
                                                 <figure><img src="{{asset('assets/images/products/'.$item->image)}}" alt="{{$item->name}}"></figure>
@@ -80,11 +79,11 @@
                             @empty
                                 <h4> no product found</h4>
                             @endforelse
-
+                            
                         </ul>
 
+                        
                     </div>
-                @endif
 
                  <div class="wrap-pagination-info">
                      {{$items->links('pagination::bootstrap-4')}}

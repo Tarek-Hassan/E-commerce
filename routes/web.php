@@ -10,6 +10,7 @@ use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\AdminCategoryComponent;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,7 @@ Route::get('/contact-us',ContactUsComponent::class);
 // for admin
 Route::middleware(['auth:sanctum','authAdmin','verified'])->name('admin.')->group(function(){
     Route::get('/admin/dashboard',AdminDashboardComponent::class )->name('dashboard');
+    Route::get('/admin/categories',AdminCategoryComponent::class )->name('categories');
 });
 // for User
 Route::middleware(['auth:sanctum', 'verified'])->name('user.')->group(function(){
