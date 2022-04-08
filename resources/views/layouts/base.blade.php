@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/chosen.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
         .wrap-pagination-info .pagination {
             padding: 0;
@@ -85,6 +86,15 @@
             cursor: default;
         }
 
+
+    </style>
+    <style>
+         .user-list tbody td>img {
+            position: relative;
+            max-width: 50px;
+            float: left;
+            margin-right: 15px;
+        }
     </style>
     @livewireStyles
 </head>
@@ -166,6 +176,9 @@
                                         </li>
                                         <li class="menu-item">
                                             <a title="Categories" href="{{route('admin.categories')}}">Categories</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a title="Products" href="{{route('admin.products')}}">Products</a>
                                         </li>
                                         <form method="POST" action="{{ route('logout') }}" x-data>
                                             <li class="menu-item">
@@ -445,7 +458,7 @@
                                 <h3 class="item-header">We Using Safe Payments:</h3>
                                 <div class="item-content">
                                     <div class="wrap-list-item wrap-gallery">
-                                        <img src="assets/images/payment.png" style="max-width: 260px;">
+                                        <img src="{{asset('assets/images/payment.png')}}" style="max-width: 260px;">
                                     </div>
                                 </div>
                             </div>
@@ -507,22 +520,14 @@
                                     <li><span class="row-title">Mobiles:</span></li>
                                     <li><a href="#" class="redirect-back-link" title="mobile">Mobiles</a></li>
                                     <li><a href="#" class="redirect-back-link" title="yphones">YPhones</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Gianee Mobiles GL">Gianee Mobiles
-                                            GL</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Karbonn">Mobiles
-                                            Karbonn</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Viva">Mobiles Viva</a>
-                                    </li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Intex">Mobiles Intex</a>
-                                    </li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Micrumex">Mobiles
-                                            Micrumex</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Bsus">Mobiles Bsus</a>
-                                    </li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Samsyng">Mobiles
-                                            Samsyng</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Lenova">Mobiles Lenova</a>
-                                    </li>
+                                    <li><a href="#" class="redirect-back-link" title="Gianee Mobiles GL">Gianee Mobiles GL</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Karbonn">Mobiles Karbonn</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Viva">Mobiles Viva</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Intex">Mobiles Intex</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Micrumex">Mobiles  Micrumex</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Bsus">Mobiles Bsus</a> </li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Samsyng">Mobiles Samsyng</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Lenova">Mobiles Lenova</a> </li>
                                 </ul>
 
                                 <ul class="list-back-link">
