@@ -420,7 +420,7 @@
                                 <h3 class="item-header">We Using Safe Payments:</h3>
                                 <div class="item-content">
                                     <div class="wrap-list-item wrap-gallery">
-                                        <img src="assets/images/payment.png" style="max-width: 260px;">
+                                        <img src="{{asset('assets/images/payment.png')}}" style="max-width: 260px;">
                                     </div>
                                 </div>
                             </div>

@@ -21,6 +21,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/chosen.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
         .wrap-pagination-info .pagination {
             padding: 0;
@@ -85,6 +86,15 @@
             cursor: default;
         }
 
+
+    </style>
+    <style>
+         .user-list tbody td>img {
+            position: relative;
+            max-width: 50px;
+            float: left;
+            margin-right: 15px;
+        }
     </style>
     @livewireStyles
 </head>
@@ -164,6 +174,12 @@
                                         <li class="menu-item">
                                             <a title="Dashboard" href="{{route('admin.dashboard')}}">Dashboard</a>
                                         </li>
+                                        <li class="menu-item">
+                                            <a title="Categories" href="{{route('admin.categories')}}">Categories</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a title="Products" href="{{route('admin.products')}}">Products</a>
+                                        </li>
                                         <form method="POST" action="{{ route('logout') }}" x-data>
                                             <li class="menu-item">
                                                 @csrf
@@ -212,38 +228,7 @@
                                     alt="mercado"></a>
                         </div>
 
-                        <div class="wrap-search center-section">
-                            <div class="wrap-search-form">
-                                <form action="#" id="form-search-top" name="form-search-top">
-                                    <input type="text" name="search" value="" placeholder="Search here...">
-                                    <button form="form-search-top" type="button"><i class="fa fa-search"
-                                            aria-hidden="true"></i></button>
-                                    <div class="wrap-list-cate">
-                                        <input type="hidden" name="product-cate" value="0" id="product-cate">
-                                        <a href="#" class="link-control">All Category</a>
-                                        <ul class="list-cate">
-                                            <li class="level-0">All Category</li>
-                                            <li class="level-1">-Electronics</li>
-                                            <li class="level-2">Batteries & Chargens</li>
-                                            <li class="level-2">Headphone & Headsets</li>
-                                            <li class="level-2">Mp3 Player & Acessories</li>
-                                            <li class="level-1">-Smartphone & Table</li>
-                                            <li class="level-2">Batteries & Chargens</li>
-                                            <li class="level-2">Mp3 Player & Headphones</li>
-                                            <li class="level-2">Table & Accessories</li>
-                                            <li class="level-1">-Electronics</li>
-                                            <li class="level-2">Batteries & Chargens</li>
-                                            <li class="level-2">Headphone & Headsets</li>
-                                            <li class="level-2">Mp3 Player & Acessories</li>
-                                            <li class="level-1">-Smartphone & Table</li>
-                                            <li class="level-2">Batteries & Chargens</li>
-                                            <li class="level-2">Mp3 Player & Headphones</li>
-                                            <li class="level-2">Table & Accessories</li>
-                                        </ul>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        @livewire('header-search-component')
 
                         <div class="wrap-icon right-section">
                             <div class="wrap-icon-section wishlist">
@@ -473,7 +458,7 @@
                                 <h3 class="item-header">We Using Safe Payments:</h3>
                                 <div class="item-content">
                                     <div class="wrap-list-item wrap-gallery">
-                                        <img src="assets/images/payment.png" style="max-width: 260px;">
+                                        <img src="{{asset('assets/images/payment.png')}}" style="max-width: 260px;">
                                     </div>
                                 </div>
                             </div>
@@ -535,22 +520,14 @@
                                     <li><span class="row-title">Mobiles:</span></li>
                                     <li><a href="#" class="redirect-back-link" title="mobile">Mobiles</a></li>
                                     <li><a href="#" class="redirect-back-link" title="yphones">YPhones</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Gianee Mobiles GL">Gianee Mobiles
-                                            GL</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Karbonn">Mobiles
-                                            Karbonn</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Viva">Mobiles Viva</a>
-                                    </li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Intex">Mobiles Intex</a>
-                                    </li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Micrumex">Mobiles
-                                            Micrumex</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Bsus">Mobiles Bsus</a>
-                                    </li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Samsyng">Mobiles
-                                            Samsyng</a></li>
-                                    <li><a href="#" class="redirect-back-link" title="Mobiles Lenova">Mobiles Lenova</a>
-                                    </li>
+                                    <li><a href="#" class="redirect-back-link" title="Gianee Mobiles GL">Gianee Mobiles GL</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Karbonn">Mobiles Karbonn</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Viva">Mobiles Viva</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Intex">Mobiles Intex</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Micrumex">Mobiles  Micrumex</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Bsus">Mobiles Bsus</a> </li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Samsyng">Mobiles Samsyng</a></li>
+                                    <li><a href="#" class="redirect-back-link" title="Mobiles Lenova">Mobiles Lenova</a> </li>
                                 </ul>
 
                                 <ul class="list-back-link">
@@ -630,7 +607,7 @@
     <script src="{{asset('assets/js/jquery-ui-1.12.4.minb8ff.js?ver=1.12.4')}}"></script>
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.flexslider.js')}}"></script>
-    {{-- <script src="{{asset('assets/js/chosen.jquery.min.js')}}"></script> --}}
+    <script src="{{asset('assets/js/chosen.jquery.min.js')}}"></script>
     <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.sticky.js')}}"></script>

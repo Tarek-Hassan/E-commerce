@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\CheckoutComponent;
@@ -7,9 +9,19 @@ use App\Http\Livewire\AboutUsComponent;
 use App\Http\Livewire\ContactUsComponent;
 use App\Http\Livewire\DetailsComponet;
 use App\Http\Livewire\CategoryComponent;
+use App\Http\Livewire\SearchComponent;
+
 use App\Http\Livewire\User\UserDashboardComponent;
+
 use App\Http\Livewire\Admin\AdminDashboardComponent;
-use Illuminate\Support\Facades\Route;
+
+use App\Http\Livewire\Admin\Category\ListCategoryComponent;
+use App\Http\Livewire\Admin\Category\AddCategoryComponent;
+use App\Http\Livewire\Admin\Category\EditCategoryComponent;
+
+use App\Http\Livewire\Admin\Product\ListProductComponent;
+use App\Http\Livewire\Admin\Product\AddProductComponent;
+use App\Http\Livewire\Admin\Product\EditProductComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +44,7 @@ Route::get('/checkout',CheckoutComponent::class)->name('product.checkout');
 Route::get('/shop',ShopComponent::class)->name('product.shop');
 Route::get('/product/{slug}',DetailsComponet::class)->name('product.detail');
 Route::get('/product-category/{category_slug}',CategoryComponent::class)->name('product.category');
+Route::get('/search',SearchComponent::class)->name('product.search');
 Route::get('/about-us',AboutUsComponent::class);
 Route::get('/contact-us',ContactUsComponent::class);
 // Route::middleware([
@@ -45,8 +58,22 @@ Route::get('/contact-us',ContactUsComponent::class);
 // });
 
 // for admin
-Route::middleware(['auth:sanctum','authAdmin','verified'])->name('admin.')->group(function(){
-    Route::get('/admin/dashboard',AdminDashboardComponent::class )->name('dashboard');
+Route::middleware(['auth:sanctum','authAdmin','verified'])->prefix('admin/')->name('admin.')->group(function(){
+    Route::get('dashboard',AdminDashboardComponent::class )->name('dashboard');
+
+    Route::prefix('categories/')->group(function(){
+        Route::get('',ListCategoryComponent::class )->name('categories');
+        Route::get('create',AddCategoryComponent::class )->name('addcategory');
+        Route::get('edit/{slug}',EditCategoryComponent::class )->name('editcategory');
+    });
+
+    Route::prefix('products/')->group(function(){
+        Route::get('',ListProductComponent::class )->name('products');
+        Route::get('create',AddProductComponent::class )->name('addproduct');
+        Route::get('edit/{slug}',EditProductComponent::class )->name('editproduct');
+        // Route::get('{slug}',ShowCategoryComponent::class )->name('showproduct');
+    });
+
 });
 // for User
 Route::middleware(['auth:sanctum', 'verified'])->name('user.')->group(function(){
