@@ -20,6 +20,6 @@ class AddCategoryComponent extends Component
     }
     public function render()
     {
-        return view('livewire.admin.admin-add-category')->layout('layouts.base');
+        return view('livewire.admin.category.add-category-component')->layout('layouts.base');
     }
 }

@@ -26,7 +26,7 @@ class ListProductComponent extends Component
     public function render()
     {
         return view('livewire.admin.product.list-product-component',[
-            'items'=>Product::paginate($this->paginate),
+            'items'=>Product::orderBy('created_at','Desc')->paginate($this->paginate),
         ])->layout('layouts.base');
     }
 }

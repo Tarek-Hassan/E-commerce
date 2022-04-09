@@ -28,7 +28,7 @@ class ListCategoryComponent extends Component
     public function render()
     {
         $categories=Category::paginate($this->paginate);
-        return view('livewire.admin.admin-category-component',[
+        return view('livewire.admin.category.list-category-component',[
             'items'=>$categories
         ])->layout('layouts.base');
     }
