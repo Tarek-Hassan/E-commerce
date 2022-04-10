@@ -22,7 +22,7 @@ class EditCategoryComponent extends Component
             $this->slug=$this->category->slug;
         }else{
 
-            return redirect()->route('admin.categories')->with('error_message','Category Not Found');
+            return redirect()->route('admin.categories')->with('error_message',__('not_found'));
         }
     }
 
@@ -30,10 +30,10 @@ class EditCategoryComponent extends Component
         $this->slug=Str::slug($this->name);
     }
 
-    public function updateCategory(){
+    public function update(){
      
         $this->category->update($this->all());  
-        return redirect()->route('admin.categories')->with('success_message','Updated Succefuly');
+        return redirect()->route('admin.categories')->with('success_message',__('updated'));
     }
     public function render()
     {

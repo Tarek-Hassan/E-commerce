@@ -10,17 +10,18 @@ class ListProductComponent extends Component
 {
     use WithPagination;
     public $paginate;
+    // protected $paginationTheme = 'bootstrap';
 
     public function mount(){
         $this->paginate=6;
     }
 
-    public function destroyproduct($id){
+    public function delete($id){
 
         $product=Product::findOrFail($id);
         $product->delete();
 
-        return redirect()->back()->with('success_message','Product Delete Successfully');
+        return redirect()->back()->with('success_message',__('deleted'));
     }
 
     public function render()

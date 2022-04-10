@@ -100,7 +100,7 @@
 </head>
 
 <body class="home-page home-01 ">
-
+    
     <!-- mobile menu -->
     <div class="mercado-clone-wrap">
         <div class="mercado-panels-actions-wrap">
@@ -123,6 +123,7 @@
                                 </li>
                             </ul>
                         </div>
+                      
                         <div class="topbar-menu right-menu">
                             <ul>
                                 <li class="menu-item lang-menu menu-item-has-children parent">
@@ -180,6 +181,9 @@
                                         <li class="menu-item">
                                             <a title="Products" href="{{route('admin.products')}}">Products</a>
                                         </li>
+                                        <li class="menu-item">
+                                            <a title="Home Sliders" href="{{route('admin.homeSliders')}}">Home Sliders</a>
+                                        </li>
                                         <form method="POST" action="{{ route('logout') }}" x-data>
                                             <li class="menu-item">
                                                 @csrf
@@ -221,6 +225,7 @@
                 </div>
 
                 <div class="container">
+                    
                     <div class="mid-section main-info-area">
 
                         <div class="wrap-logo-top left-section">
@@ -310,6 +315,9 @@
             </div>
         </div>
     </header>
+
+  
+
 
     {{$slot}}
 

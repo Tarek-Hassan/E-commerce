@@ -19,21 +19,19 @@
                     @endif
                         <div class="table-responsive">
                             <div class="col-md-12 text-right mb-5">
-                            <a href="{{route('admin.addproduct')}}" class="btn btn-primary">{{__('create_new')}}</a>
+                            <a href="{{route('admin.addHomeSliders')}}" class="btn btn-primary">{{__('create_new')}}</a>
                             </div>
                             <table class="table user-list">
                                 <thead>
                                     <tr>
                                         <th><span>#</span></th>
                                         <th><span>{{__('image')}}</span></th>
-                                        <th><span>{{__('name')}}</span></th>
-                                        <th><span>{{__('slug')}}</span></th>
-                                        <th><span>{{__('stock')}}</span></th>
+                                        <th><span>{{__('title')}}</span></th>
+                                        <th><span>{{__('subtitle')}}</span></th>
                                         <th><span>{{__('price')}}</span></th>
-                                        <th><span>{{__('category')}}</span></th>
-                                        <th><span>{{__('date')}}</span></th>
+                                        <th><span>{{__('link')}}</span></th>
+                                        <th><span>{{__('status')}}</span></th>
                                         <th><span>{{__('action')}}</span></th>
-
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -42,18 +40,17 @@
                                     <tr class="cell-1">
                                         <td class="text-center">{{$item->id}}</td>
                                         <td><img src="{{asset($item->image)}}" alt=""></td>
-                                        <td>{{$item->name}}</td>
-                                        <td>{{$item->slug}}</td>
+                                        <td>{{$item->title}}</td>
+                                        <td>{{$item->subtitle}}</td>
+                                        <td>{{number_format($item->price,2)}}</td>
+                                        <td>{{$item->link}}</td>
                                         <td class="text-center">
                                             {!!$item->status()!!}
                                         </td>
-                                        <td>{{number_format($item->regular_price,2)}}</td>
-                                        <td>{{optional($item->category)->name}}</td>
-                                        <td>{{$item->created_at->format('d/m/Y')}}</td>
                                         <td>
 
                                               
-                                                    <a href="{{route('admin.editproduct',['slug'=>$item->slug])}}"
+                                                    <a href="{{route('admin.editHomeSliders',['id'=>$item->id])}}"
                                                         data-toggle="tooltip" data-placement="top" title=""
                                                         data-original-title="edit">
                                                         <i class="far fa-edit fa-2x text-success"></i>
@@ -71,13 +68,12 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <th scope="row">{{__('no_data_found')}}</th>
+                                        <th scope="row" class="text-center" colspan="8">{{__('no_data_found')}}</th>
                                     </tr>
                                     @endforelse
                                 </tbody>
                             </table>
                             <div class="wrap-pagination-info">
-                                {{-- {{$items->links()}} --}}
                                 {{$items->links('pagination::bootstrap-4')}}
                             </div>
                         </div>

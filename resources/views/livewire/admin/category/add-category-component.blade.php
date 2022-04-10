@@ -10,7 +10,7 @@
                         </li>
                     </ul>
                     <div class="table-responsive table-borderless">
-                        <form action="" wire:submit.prevent="storeCategory">
+                        <form action="" wire:submit.prevent="store">
                             <div class="form-group col-md-6">
                                 <label for="name">{{__('name')}}</label>
                                 <input type="text" class="form-control" id="name" name="name" wire:model="name" wire:keyup="generateSlug">
@@ -19,7 +19,7 @@
                                 <label for="slug">{{__('slug')}}</label>
                                 <input type="text" class="form-control" id="slug" name="slug" wire:model="slug">
                             </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
+                            <button type="submit" class="btn btn-default">{{__('create')}}</button>
                         </form>
                     </div>
                 </div>

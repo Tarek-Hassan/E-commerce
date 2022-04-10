@@ -25,9 +25,9 @@
                                 <thead>
                                     <tr>
                                         <th><span>#</span></th>
-                                        <th><span>Name</span></th>
-                                        <th><span>Slug</span></th>
-                                        <th><span>Action</span></th>
+                                        <th><span>{{__('name')}}</span></th>
+                                        <th><span>{{__('slug')}}</span></th>
+                                        <th><span>{{__('action')}}</span></th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -48,7 +48,7 @@
 
 
 
-                                                    <a href="#" wire:click.prevent="destroyCategory({{$item->id}})" >
+                                                    <a href="#"  onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{$item->id}})" >
                                                         <i class="fa-solid fa-2x fa-trash-can text-danger"></i>
                                                     </a>
                                                
@@ -58,7 +58,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <th scope="row">No Category</th>
+                                        <th scope="row">{{__('no_data_found')}}</th>
                                     </tr>
                                     @endforelse
                                 </tbody>
