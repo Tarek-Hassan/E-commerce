@@ -28,6 +28,7 @@ use App\Http\Livewire\Admin\HomeSlider\AddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\EditHomeSliderComponent;
 
 use App\Http\Livewire\Admin\HomeCategory\HomeCategoryComponent;
+use App\Http\Livewire\Admin\HomeCategory\HomeSaleSettingComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -84,9 +85,11 @@ Route::middleware(['auth:sanctum','authAdmin','verified'])->prefix('admin/')->na
         Route::get('create',AddHomeSliderComponent::class )->name('addHomeSliders');
         Route::get('edit/{id}',EditHomeSliderComponent::class )->name('editHomeSliders');
     });
-    Route::prefix('home-category/')->group(function(){
-        Route::get('',HomeCategoryComponent::class )->name('homeCategories');
-    });
+    // Route::prefix('home-category/')->group(function(){
+
+        Route::get('home-category/',HomeCategoryComponent::class )->name('homeCategories');
+        Route::get('home-sale-setting/',HomeSaleSettingComponent::class )->name('homeSaleSetting');
+
 
 });
 // for User

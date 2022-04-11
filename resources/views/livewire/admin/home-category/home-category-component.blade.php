@@ -23,7 +23,7 @@
 
                                 <div class="form-group col-md-6" wire:ignore>
                                     <label for="sel_categories">{{__('sel_categories')}}</label>
-                                    <select class="sel_categories form-control"  name="categories[]" wire:model="select_categories" multiple >
+                                    <select class="sel_categories form-control"   wire:model="select_categories" multiple >
                                         @foreach ( $categories as $category )
                                             <option value="{{$category->id}}"> {{$category->name}}</option>
                                         @endforeach
@@ -36,10 +36,9 @@
                                         name="no_of_products" wire:model.lazy="no_of_products">
                                 </div>
                             
-
                             
                                 <div class="form-group col-md-12">
-                                    <button type="submit" class="btn btn-default">{{__('update')}}</button>
+                                    <button type="submit" class="btn btn-default">{{__('save')}}</button>
                                 </div>
                             
                         </form>

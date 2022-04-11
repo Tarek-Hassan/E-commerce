@@ -30,6 +30,7 @@
                                         <th><span>{{__('slug')}}</span></th>
                                         <th><span>{{__('stock')}}</span></th>
                                         <th><span>{{__('price')}}</span></th>
+                                        <th><span>{{__('sale_price')}}</span></th>
                                         <th><span>{{__('category')}}</span></th>
                                         <th><span>{{__('date')}}</span></th>
                                         <th><span>{{__('action')}}</span></th>
@@ -48,6 +49,7 @@
                                             {!!$item->status()!!}
                                         </td>
                                         <td>{{number_format($item->regular_price,2)}}</td>
+                                        <td>{{number_format($item->sale_price??0,2)}}</td>
                                         <td>{{optional($item->category)->name}}</td>
                                         <td>{{$item->created_at->format('d/m/Y')}}</td>
                                         <td>
