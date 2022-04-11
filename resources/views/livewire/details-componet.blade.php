@@ -11,38 +11,10 @@
 							<div class="product-gallery">
 							  <ul class="slides">
 
-							    <li data-thumb="{{asset('assets/images/products/'.$item->image)}}">
-							    	<img src="{{asset('assets/images/products/'.$item->image)}}" alt="{{$item->name}}" />
+							    <li data-thumb="{{asset($item->image)}}">
+							    	<img src="{{asset($item->image)}}" alt="{{$item->name}}" />
 							    </li>
-                                {{-- 
-							    <li data-thumb="{{asset('assets/images/products/digital_17.jpg')}}">
-							    	<img src="{{asset('assets/images/products/digital_17.jpg')}}" alt="product thumbnail" />
-							    </li>
-
-							    <li data-thumb="{{asset('assets/images/products/digital_15.jpg')}}">
-							    	<img src="{{asset('assets/images/products/digital_15.jpg')}}" alt="product thumbnail" />
-							    </li>
-
-							    <li data-thumb="{{asset('assets/images/products/digital_2.jpg')}}">
-							    	<img src="{{asset('assets/images/products/digital_2.jpg')}}" alt="product thumbnail" />
-							    </li>
-
-							    <li data-thumb="{{asset('assets/images/products/digital_8.jpg')}}">
-							    	<img src="{{asset('assets/images/products/digital_8.jpg')}}" alt="product thumbnail" />
-							    </li>
-
-							    <li data-thumb="{{asset('assets/images/products/digital_10.jpg')}}">
-							    	<img src="{{asset('assets/images/products/digital_10.jpg')}}" alt="product thumbnail" />
-							    </li>
-
-							    <li data-thumb="{{asset('assets/images/products/digital_12.jpg')}}">
-							    	<img src="{{asset('assets/images/products/digital_12.jpg')}}" alt="product thumbnail" />
-							    </li>
-
-							    <li data-thumb="{{asset('assets/images/products/digital_14.jpg')}}">
-							    	<img src="{{asset('assets/images/products/digital_14.jpg')}}" alt="product thumbnail" />
-							    </li>
-                                --}}
+                                
 							  </ul>
 							</div>
 						</div>
@@ -62,7 +34,13 @@
                             <div class="wrap-social">
                             	<a class="link-socail" href="#"><img src="{{asset('assets/images/social-list.png')}}" alt=""></a>
                             </div>
-                            <div class="wrap-price"><span class="product-price">${{$item->regular_price}}</span></div>
+
+							@if ($item->sale_price > 0 && $sale_date > now() )
+								<div class="wrap-price"><ins><p class="product-price">${{$item->sale_price}}</p></ins> <del><p class="product-price">${{$item->regular_price}}</p></del></div>
+							@else
+                            	<div class="wrap-price"><span class="product-price">${{$item->regular_price}}</span></div>
+							@endif
+
                             <div class="stock-info in-stock">
                                 <p class="availability">Availability: <b>{{$item->stock_status}}</b></p>
                             </div>
@@ -71,7 +49,7 @@
 								<div class="quantity-input">
 									<input type="text" name="product-quatity" value="1" data-max="120" pattern="[0-9]*" >
 									<a class="btn btn-reduce" href="#"></a>
-									<a class="btn btn-increase" href="#"></a>
+									<a class="btn btn-increase" href="#" ></a>
 								</div>
 							</div>
 							<div class="wrap-butons">

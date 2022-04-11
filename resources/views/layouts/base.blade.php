@@ -21,6 +21,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/chosen.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
+   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" integrity="sha512-WWc9iSr5tHo+AliwUnAQN1RfGK9AnpiOFbmboA0A0VJeooe69YR2rLgHw13KxF1bOSLmke+SNnLWxmZd8RTESQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
     <style>
         .wrap-pagination-info .pagination {
             padding: 0;
@@ -185,6 +188,9 @@
                                         </li>
                                         <li class="menu-item">
                                             <a title="Home Categories" href="{{route('admin.homeCategories')}}">Home Categories</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a title="Home Sale Setting" href="{{route('admin.homeSaleSetting')}}">Home Sale Setting</a>
                                         </li>
 
                                         <form method="POST" action="{{ route('logout') }}" x-data>
@@ -623,10 +629,14 @@
     <script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.sticky.js')}}"></script>
     <script src="{{asset('assets/js/functions.js')}}"></script>
-   
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.js" integrity="sha512-3hZVhR3sY0kWODNQDsPtq4J0/onmTN57pZcNV2SWsn2VylVZ/g5DVWyrPdFsgcH3aMdyTABZIuOakNw8Y0RTRw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js" integrity="sha512-Y+0b10RbVUTf3Mi0EgJue0FoheNzentTMMIE2OreNbqnUPNbQj8zmjK3fs5D2WhQeGWIem2G2UkKjAL/bJ/UXQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
     @livewireScripts
+    
     @stack('scripts')
+
 </body>
 
 </html>
