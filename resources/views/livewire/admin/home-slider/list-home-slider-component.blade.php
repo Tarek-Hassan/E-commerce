@@ -7,13 +7,13 @@
                        
                         @if (Session::has('success_message'))
                         <div class="alert alert-success">
-                            <strong>Success </strong>{{Session::get('success_message')}}
+                            <strong>{{__('success')}} </strong>{{Session::get('success_message')}}
         
                         </div>
                     @endif
                         @if (Session::has('error_message'))
                         <div class="alert alert-danger">
-                            <strong>Error </strong>{{Session::get('error_message')}}
+                            <strong>{{__('error')}}  </strong>{{Session::get('error_message')}}
         
                         </div>
                     @endif
@@ -53,13 +53,14 @@
                                                     <a href="{{route('admin.editHomeSliders',['id'=>$item->id])}}"
                                                         data-toggle="tooltip" data-placement="top" title=""
                                                         data-original-title="edit">
-                                                        <i class="far fa-edit fa-2x text-success"></i>
+                                                        <i class="fa fa-pencil-square-o fa-2x text-success"></i>
+        
                                                     </a>
 
 
 
                                                     <a href="#"  onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{$item->id}})" >
-                                                        <i class="fa-solid fa-2x fa-trash-can text-danger"></i>
+                                                        <i class="fa-2x fa fa-trash-o text-danger"></i>
                                                     </a>
                                                
 

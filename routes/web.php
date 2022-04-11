@@ -27,6 +27,8 @@ use App\Http\Livewire\Admin\HomeSlider\ListHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\AddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\EditHomeSliderComponent;
 
+use App\Http\Livewire\Admin\HomeCategory\HomeCategoryComponent;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,6 +83,9 @@ Route::middleware(['auth:sanctum','authAdmin','verified'])->prefix('admin/')->na
         Route::get('',ListHomeSliderComponent::class )->name('homeSliders');
         Route::get('create',AddHomeSliderComponent::class )->name('addHomeSliders');
         Route::get('edit/{id}',EditHomeSliderComponent::class )->name('editHomeSliders');
+    });
+    Route::prefix('home-category/')->group(function(){
+        Route::get('',HomeCategoryComponent::class )->name('homeCategories');
     });
 
 });
