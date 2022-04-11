@@ -13,7 +13,7 @@ class ListProductComponent extends Component
     // protected $paginationTheme = 'bootstrap';
 
     public function mount(){
-        $this->paginate=6;
+        $this->paginate=10;
     }
 
     public function delete($id){

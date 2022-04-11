@@ -29,8 +29,6 @@
 							<div class="sort-item orderby ">
 								<select name="orderby" class="use-chosen" wire:model="sorting">
 									<option value="default" selected="selected">Default sorting</option>
-									{{-- <option value="popularity">Sort by popularity</option>
-									<option value="rating">Sort by average rating</option> --}}
 									<option value="date">Sort by newness</option>
 									<option value="price">Sort by price: low to high</option>
 									<option value="price-desc">Sort by price: high to low</option>
@@ -67,7 +65,7 @@
 									<div class="product product-style-3 equal-elem ">
 										<div class="product-thumnail">
 											<a href="{{route('product.detail',['slug'=>$item->slug])}}" title="{{$item->name}}">
-												<figure><img src="{{asset('assets/images/products/'.$item->image)}}" alt="{{$item->name}}"></figure>
+												<figure><img src="{{asset($item->image)}}" alt="{{$item->name}}"></figure>
 											</a>
 										</div>
 										<div class="product-info">
@@ -87,13 +85,6 @@
 
 					<div class="wrap-pagination-info">
 						{{$items->links('pagination::bootstrap-4')}}
-						{{-- <ul class="page-numbers">
-							<li><span class="page-number-item current" >1</span></li>
-							<li><a class="page-number-item" href="#" >2</a></li>
-							<li><a class="page-number-item" href="#" >3</a></li>
-							<li><a class="page-number-item next-link" href="#" >Next</a></li>
-						</ul>
-						<p class="result-count">Showing 1-8 of 12 result</p> --}}
 					</div>
 				</div><!--end main products area-->
 
@@ -139,14 +130,15 @@
 					</div><!-- brand widget-->
 
 					<div class="widget mercado-widget filter-widget price-filter">
-						<h2 class="widget-title">Price</h2>
+						<h2 class="widget-title">Price <span class="text-info">[ ${{$min_price}} - ${{$max_price}}]</span></h2>
 						<div class="widget-content">
-							<div id="slider-range"></div>
+							<div id="slider" wire:ignore></div>
+							{{-- <div id="slider-range"></div>
 							<p>
 								<label for="amount">Price:</label>
 								<input type="text" id="amount" readonly>
 								<button class="filter-submit">Filter</button>
-							</p>
+							</p> --}}
 						</div>
 					</div><!-- Price-->
 
@@ -251,4 +243,32 @@
 
 	</main>
 	<!--main area-->
+
 </div>
+@push('scripts')
+	<script>
+		var slider = document.getElementById('slider');
+
+			noUiSlider.create(slider, {
+				start: [1, 1000],
+				connect: true,
+				range: {
+					'min': 1,
+					'max': 1000
+				},
+				pips: {
+					mode: 'steps',
+					stepped: true,
+					density: 4
+    			}
+			});
+
+			slider.noUiSlider.on('update',function(value){
+
+				@this.set('min_price', value[0]);
+				@this.set('max_price',value[1]);
+
+			});
+
+	</script>	
+@endpush

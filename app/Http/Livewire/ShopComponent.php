@@ -12,9 +12,17 @@ class ShopComponent extends Component
 {
     use WithPagination;
     public $sorting;
-    public $paginate;
+    public $paginate=12;
     public $orderBy;
     public $orderType;
+    public $min_price=1;
+    public $max_price=1000;
+
+    public function mount(){
+        $this->sorting='default';
+        $this->orderBy='created_at';
+        $this->orderType='ASC';
+    }
 
     public function store($id,$name,$price)
     {
@@ -24,12 +32,7 @@ class ShopComponent extends Component
 
     }
 
-    public function mount(){
-        $this->sorting='default';
-        $this->paginate=12;
-        $this->orderBy='created_at';
-        $this->orderType='ASC';
-    }
+
 
     public function render()
     {
@@ -46,7 +49,7 @@ class ShopComponent extends Component
         $Categories=Category::all();
         
         return view('livewire.shop-component',[
-            'items' => Product::orderBy($this->orderBy,$this->orderType)->paginate($this->paginate),
+            'items' => Product::whereBetween('regular_price',[$this->min_price,$this->max_price])->orderBy($this->orderBy,$this->orderType)->paginate($this->paginate),
             'Categories' => $Categories,
         ])->layout('layouts.base');
     }

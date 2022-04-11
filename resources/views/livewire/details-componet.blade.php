@@ -220,7 +220,7 @@
                                             <div class="product product-widget-style">
                                                 <div class="thumbnnail">
                                                     <a href="{{route('product.detail',['slug'=>$product->slug])}}" title="{{$product->name}}">
-                                                        <figure><img src="{{asset('assets/images/products/'.$product->image)}}" alt=""></figure>
+                                                        <figure><img src="{{asset($product->image)}}" alt=""></figure>
                                                     </a>
                                                 </div>
                                                 <div class="product-info">
@@ -249,7 +249,7 @@
                                         <div class="product product-style-2 equal-elem ">
                                             <div class="product-thumnail">
                                                 <a href="{{route('product.detail',['slug'=>$product->slug])}}" title="{{$product->name}}">
-                                                    <figure><img src="{{asset('assets/images/products/'.$product->image)}}" width="214" height="214" alt="{{$product->name}}"></figure>
+                                                    <figure><img src="{{asset($product->image)}}" width="214" height="214" alt="{{$product->name}}"></figure>
                                                 </a>
                                                 <div class="group-flash">
                                                     <span class="flash-item new-label">new</span>
