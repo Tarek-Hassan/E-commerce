@@ -13,10 +13,9 @@ class AddCategoryComponent extends Component
     public function generateSlug(){
         $this->slug=str::slug($this->name);
     }
-    public function storeCategory(){
+    public function store(){
         Category::create($this->all());
-        return redirect()->route('admin.categories')->with('success_message','Category Created Succeefuly');
-        // session()->flash('success_message','Category Created Succeefuly');
+        return redirect()->route('admin.categories')->with('success_message',__('created'));
     }
     public function render()
     {

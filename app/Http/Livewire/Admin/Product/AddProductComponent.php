@@ -14,25 +14,16 @@ class AddProductComponent extends Component
     public $image;
     public $name;
     public $slug;
-    public $stock_status;
-    public $category_id;
-    public $regular_price;
-    public $sale_price;
-    public $quantity;
+    public $stock_status="instock";
+    public $category_id='select_Category';
+    public $regular_price=0;
+    public $sale_price=0;
+    public $quantity=0;
     public $SKU;
-    public $featured;
+    public $featured=0;
     public $short_description;
     public $description;
 
-    public function mount(){
-        $this->stock_status='instock';
-        $this->category_id='select_Category';
-        $this->regular_price=0;
-        $this->sale_price=0;
-        $this->quantity=1;
-        $this->featured=0;
-
-    }
 
 
     public function generateSlug(){
@@ -41,7 +32,7 @@ class AddProductComponent extends Component
     public function store(){
         $this->image='storage/'.$this->image->store('products','public');
         Product::create($this->all());
-       return redirect()->route("admin.products")->with("success_message",'ProductCreatedSuccessfully');
+       return redirect()->route("admin.products")->with("success_message",__('created'));
     }
 
     public function render()

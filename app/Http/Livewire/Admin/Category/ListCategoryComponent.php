@@ -16,13 +16,13 @@ class ListCategoryComponent extends Component
         
     }
 
-    public function destroyCategory($id){
+    public function delete($id){
         $category=Category::findOrFail($id);
         if($category){
             $category->delete();
-            return redirect()->back()->with('success_message', 'Category Deleted Successfully');
+            return redirect()->back()->with('success_message',__('deleted'));
         }
-        return redirect()->back()->with('error_message', 'Category Not Found');
+        return redirect()->back()->with('error_message', __('not_found'));
     }
 
     public function render()

@@ -46,7 +46,7 @@ class EditProductComponent extends Component
             $this->description=$this->product->description;
             
         }else{
-            return redirect()->route("admin.products")->with('error_message','Product Not Fount');
+            return redirect()->route("admin.products")->with('error_message',__('not_found'));
         }
 
     }
@@ -60,7 +60,7 @@ class EditProductComponent extends Component
             $this->image='storage/'.$this->new_img->store('products','public');
         }
         $this->product->update($this->all());
-        return redirect()->route("admin.products")->with('success_message','Product Updated Successfully');
+        return redirect()->route("admin.products")->with('success_message',__('updated'));
     }
     public function render()
     {

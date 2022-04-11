@@ -21,7 +21,6 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/chosen.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/color-01.css')}}">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <style>
         .wrap-pagination-info .pagination {
             padding: 0;
@@ -100,7 +99,7 @@
 </head>
 
 <body class="home-page home-01 ">
-
+    
     <!-- mobile menu -->
     <div class="mercado-clone-wrap">
         <div class="mercado-panels-actions-wrap">
@@ -123,6 +122,7 @@
                                 </li>
                             </ul>
                         </div>
+                      
                         <div class="topbar-menu right-menu">
                             <ul>
                                 <li class="menu-item lang-menu menu-item-has-children parent">
@@ -180,6 +180,13 @@
                                         <li class="menu-item">
                                             <a title="Products" href="{{route('admin.products')}}">Products</a>
                                         </li>
+                                        <li class="menu-item">
+                                            <a title="Home Sliders" href="{{route('admin.homeSliders')}}">Home Sliders</a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a title="Home Categories" href="{{route('admin.homeCategories')}}">Home Categories</a>
+                                        </li>
+
                                         <form method="POST" action="{{ route('logout') }}" x-data>
                                             <li class="menu-item">
                                                 @csrf
@@ -221,6 +228,7 @@
                 </div>
 
                 <div class="container">
+                    
                     <div class="mid-section main-info-area">
 
                         <div class="wrap-logo-top left-section">
@@ -310,6 +318,9 @@
             </div>
         </div>
     </header>
+
+  
+
 
     {{$slot}}
 
@@ -612,7 +623,10 @@
     <script src="{{asset('assets/js/jquery.countdown.min.js')}}"></script>
     <script src="{{asset('assets/js/jquery.sticky.js')}}"></script>
     <script src="{{asset('assets/js/functions.js')}}"></script>
+   
+
     @livewireScripts
+    @stack('scripts')
 </body>
 
 </html>

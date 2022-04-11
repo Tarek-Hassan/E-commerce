@@ -7,13 +7,13 @@
                        
                         @if (Session::has('success_message'))
                         <div class="alert alert-success">
-                            <strong>Success </strong>{{Session::get('success_message')}}
+                            <strong>{{__('success')}} </strong>{{Session::get('success_message')}}
         
                         </div>
                     @endif
                         @if (Session::has('error_message'))
                         <div class="alert alert-danger">
-                            <strong>Error </strong>{{Session::get('error_message')}}
+                            <strong>{{__('error')}}  </strong>{{Session::get('error_message')}}
         
                         </div>
                     @endif
@@ -25,9 +25,9 @@
                                 <thead>
                                     <tr>
                                         <th><span>#</span></th>
-                                        <th><span>Name</span></th>
-                                        <th><span>Slug</span></th>
-                                        <th><span>Action</span></th>
+                                        <th><span>{{__('name')}}</span></th>
+                                        <th><span>{{__('slug')}}</span></th>
+                                        <th><span>{{__('action')}}</span></th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -43,13 +43,13 @@
                                                     <a href="{{route('admin.editcategory',['slug'=>$item->slug])}}"
                                                         data-toggle="tooltip" data-placement="top" title=""
                                                         data-original-title="edit">
-                                                        <i class="far fa-edit fa-2x text-success"></i>
+                                                        <i class="fa fa-pencil-square-o fa-2x text-success"></i>
                                                     </a>
 
 
 
-                                                    <a href="#" wire:click.prevent="destroyCategory({{$item->id}})" >
-                                                        <i class="fa-solid fa-2x fa-trash-can text-danger"></i>
+                                                    <a href="#"  onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{$item->id}})" >
+                                                        <i class="fa-2x fa fa-trash-o text-danger"></i>
                                                     </a>
                                                
 
@@ -58,7 +58,7 @@
                                     </tr>
                                     @empty
                                     <tr>
-                                        <th scope="row">No Category</th>
+                                        <th scope="row">{{__('no_data_found')}}</th>
                                     </tr>
                                     @endforelse
                                 </tbody>
