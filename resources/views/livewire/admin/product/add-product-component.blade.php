@@ -16,14 +16,14 @@
                             <div class="row">
                                 <div class="form-group col-md-8">
                                     <label for="name">{{__('product_imge')}}</label>
-                                    <input type="file" class="input-file" name="image"  wire:model="image" />
+                                    <input type="file" class="input-file" name="image" wire:model="image" />
                                     @error('image') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                                 @if ($image)
-                                    <div class="form-group col-md-4">
-                                        
-                                        <img src="{{asset($image->temporaryUrl())}}" />
-                                    </div>
+                                <div class="form-group col-md-4">
+
+                                    <img src="{{asset($image->temporaryUrl())}}" />
+                                </div>
                                 @endif
                             </div>
 
@@ -32,11 +32,12 @@
                                     <label for="name">{{__('name')}}</label>
                                     <input type="text" class="form-control" id="name" name="name" wire:model="name"
                                         wire:keyup="generateSlug">
-                                        @error('name') <span class="error">{{ $message }}</span> @enderror
+                                    @error('name') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="slug">{{__('slug')}}</label>
-                                    <input type="text" class="form-control" id="slug" name="slug" wire:model.lazy="slug">
+                                    <input type="text" class="form-control" id="slug" name="slug"
+                                        wire:model.lazy="slug">
                                     @error('slug') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
@@ -64,13 +65,13 @@
                                     <label for="regular_price">{{__('regular_price')}}</label>
                                     <input type="number" step="any" min="0" class="form-control" id="regular_price"
                                         name="regular_price" wire:model.lazy="regular_price">
-                                        @error('regular_price') <span class="error">{{ $message }}</span> @enderror
+                                    @error('regular_price') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="sale_price">{{__('sale_price')}}</label>
                                     <input type="number" step="any" min="0" class="form-control" id="sale_price"
                                         name="sale_price" wire:model.lazy="sale_price">
-                                        @error('sale_price') <span class="error">{{ $message }}</span> @enderror
+                                    @error('sale_price') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -79,7 +80,7 @@
                                     <label for="quantity">{{__('quantity')}}</label>
                                     <input type="number" min="1" class="form-control" id="quantity" name="quantity"
                                         wire:model.lazy="quantity">
-                                        @error('quantity') <span class="error">{{ $message }}</span> @enderror
+                                    @error('quantity') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="SKU">{{__('SKU')}}</label>
@@ -101,17 +102,26 @@
                                     <label for="short_description">{{__('short_description')}}</label>
                                     <input type="text" class="form-control" id="short_description"
                                         name="short_description" wire:model.lazy="short_description">
-                                        @error('short_description') <span class="error">{{ $message }}</span> @enderror
+                                    @error('short_description') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+                        
                             <div class="row">
-                                <div class="form-group col-md-12">
+                                {{-- <div class="form-group col-md-12" wire:ignore>
                                     <label for="description">{{__('description')}}</label>
-                                    <textarea class="form-control summernote"  name="description" wire:model.lazy="description"
-                                        row="3"></textarea>
-                                        @error('description') <span class="error">{{ $message }}</span> @enderror
+                                    <textarea class="form-control " id="ckeditor" name="description"
+                                        wire:model="description" row="3"></textarea>
+                                    @error('description') <span class="error">{{ $message }}</span> @enderror
+                                </div> --}}
+                                <div class="form-group col-md-12" wire:ignore>
+                                    <label for="description">{{__('description')}}</label>
+                                    <textarea class="form-control "  name="description"
+                                        wire:model="description" row="3"></textarea>
+                                    @error('description') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+
+
                             <div class="row">
                                 <div class="form-group col-md-12">
                                     <button type="submit" class="btn btn-default">{{__('create')}}</button>
@@ -124,14 +134,22 @@
         </div>
     </div>
 </div>
-@push('script')
+@push('scripts')
 
 <script>
-    (function(){
+    // ClassicEditor.create(document.querySelector('#ckeditor'))
+    //     .then(editor => {
+    //         console.log(editor);
+    //         // let data=$(this).val();
+    // //          $this.set('description',data);
+    //     })
+    //     .on('change',function(e) {
+    //         console.log("ch");
+            
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
 
-        $('.summernote').summernote();
-    });
 </script>
-    
 @endpush
-
