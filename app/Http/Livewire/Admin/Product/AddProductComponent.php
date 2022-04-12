@@ -79,6 +79,7 @@ class AddProductComponent extends Component
     public function generateSlug(){
         $this->slug=Str::slug($this->name);
     }
+
     public function store(){
 
         $this->validate();

@@ -72,6 +72,9 @@
 											<a href="#" class="product-name"><span>{{$item->name}}</span></a>
 											<div class="wrap-price"><span class="product-price">${{$item->regular_price}}</span></div>
 											<a href="#" class="btn add-to-cart" wire:click.prevent="store({{$item->id}},'{{$item->name}}',{{$item->regular_price}})">Add To Cart</a>
+											<div class="product-wish">
+												<a href="#"><i class="fa fa-heart"></i></a>
+											</div>
 										</div>
 									</div>
 								</li>
