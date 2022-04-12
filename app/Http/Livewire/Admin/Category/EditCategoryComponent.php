@@ -26,11 +26,19 @@ class EditCategoryComponent extends Component
         }
     }
 
+    protected function rules(){
+        return [
+            'name'=>'required|min:6',
+            'slug'=>'required|unique:categories,slug,'.$this->category->id,
+        ];
+    }
+
     public function generateSlug(){
         $this->slug=Str::slug($this->name);
     }
 
     public function update(){
+        $this->validate();
      
         $this->category->update($this->all());  
         return redirect()->route('admin.categories')->with('success_message',__('updated'));

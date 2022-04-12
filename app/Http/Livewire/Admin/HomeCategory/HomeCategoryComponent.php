@@ -20,11 +20,27 @@ class HomeCategoryComponent extends Component
             $this->no_of_products=$homeCategory->no_of_products;
         }
         
-        
-        
+    }
+
+    protected function rules(){
+        return [
+            'sel_categories'=>'required',
+            'no_of_products'=>'required|min:1',
+        ];
+    }
+    
+    protected function message(){
+        return [
+            'sel_categories.required'=>'Categories Should be Selected ',
+
+            'no_of_products.required'=>'No Of Products Is Required ',
+            'no_of_products.min'=>'No Of Products greater Than 0 ',
+        ];
     }
 
     public function update(){
+        $this->validate();
+
         $this->sel_categories=implode(',',$this->select_categories);
         if(HomeCategory::count() > 0){
             HomeCategory::first()->update($this->all());
