@@ -28,12 +28,14 @@
                                             <option value="{{$category->id}}"> {{$category->name}}</option>
                                         @endforeach
                                     </select>
+                                    @error('select_categories') <span class="error">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label for="no_of_products">{{__('no_of_products')}}</label>
                                     <input type="number"  min="1" class="form-control" id="no_of_products"
                                         name="no_of_products" wire:model.lazy="no_of_products">
+                                        @error('no_of_products') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             
                             

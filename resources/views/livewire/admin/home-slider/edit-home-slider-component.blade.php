@@ -39,10 +39,14 @@
                                     <label for="title">{{__('title')}}</label>
                                     <input type="text" class="form-control" id="title" name="title" wire:model.lazy="title"
                                         wire:keyup="generateSlug">
+                                    @error('title') <span class="error">{{ $message }}</span> @enderror
+
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="subtitle">{{__('subtitle')}}</label>
                                     <input type="text" class="form-control" id="subtitle" name="subtitle" wire:model.lazy="subtitle">
+                                    @error('subtitle') <span class="error">{{ $message }}</span> @enderror
+
                                 </div>
                               
                             </div>
@@ -53,11 +57,14 @@
                                 <div class="form-group col-md-4">
                                     <label for="link">{{__('link')}}</label>
                                     <input type="text" class="form-control" id="link" name="link" wire:model.lazy="link">
+                                    @error('link') <span class="error">{{ $message }}</span> @enderror
+
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="price">{{__('price')}}</label>
                                     <input type="number" step="any" min="0" class="form-control" id="price"
                                         name="price" wire:model.lazy="price">
+                                    @error('price') <span class="error">{{ $message }}</span> @enderror
                                 </div>
 
                                 <div class="form-group col-md-4">
@@ -66,6 +73,7 @@
                                         <option value="1"> {{__('yes')}}</option>
                                         <option value="0"> {{__('no')}}</option>
                                     </select>
+                                    @error('status') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 

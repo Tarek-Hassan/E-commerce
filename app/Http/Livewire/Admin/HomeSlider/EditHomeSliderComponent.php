@@ -19,6 +19,37 @@ class EditHomeSliderComponent extends Component
     public $status;
     public $slider;
 
+
+    protected function rules(){
+        return [
+            'title'=>'required',
+            'subtitle'=>'required',
+            'price'=>'required|numeric|min:0',
+            'link'=>'required|url',
+            'image'=>'required',
+        ];
+    }
+    
+    protected function message(){
+        return [
+            'title.required'=>'Title Is Required ',
+            'subtitle.required'=>'SubTitle Is Required ',
+            
+            'price.required'=>'Price Is Required ',
+            'price.numeric'=>'Price Must be Numeric ',
+            'price.min'=>'Price greater Than 0 ',
+
+            'link.required'=>'Link Is Required ',
+            'link.url'=>'Link is In vaild',
+
+            'image.required'=>'Image Is Required ',
+
+            'no_of_products.required'=>'No Of Products Is Required ',
+        ];
+    }
+
+
+
     public function mount($id){
         $this->slider=HomeSlider::find($id);
         if($this->slider){
@@ -37,6 +68,8 @@ class EditHomeSliderComponent extends Component
     }
 
     public function update(){
+
+        $this->validate();
 
         if($this->new_image){
             $this->image='storage/'.$this->new_image->store('HomeSlider','public');

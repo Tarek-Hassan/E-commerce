@@ -26,6 +26,7 @@
                             <label for="sale_date">{{ __('sale_date') }}</label>
                             <input type="text" class="form-control " id="sale_date" name="sale_date"
                                 wire:model="sale_date">
+                                @error('sale_date') <span class="error">{{ $message }}</span> @enderror
 
                         </div>
 
@@ -35,6 +36,7 @@
                                 <option value="1"> {{ __('active') }}</option>
                                 <option value="0"> {{ __('in_active') }}</option>
                             </select>
+                            @error('status') <span class="error">{{ $message }}</span> @enderror
                         </div>
 
                         <div class="form-group col-md-12">

@@ -21,7 +21,25 @@ class HomeSaleSettingComponent extends Component
         }
 
     }
+
+    protected function rules(){
+        return [
+            'sale_date'=>'required|date',
+            'status'=>'status',
+        ];
+    }
+    protected function message(){
+        return [
+            'status.required'=>'Status Should be Selected ',
+
+            'sale_date.required'=>'Sale Date Is Required ',
+            'sale_date.date'=>'Sale Date Invaild Formate',
+        ];
+    }
+
     public function update(){
+
+        $this->validate();
 
         if(SaleSetting::count() > 0){ 
             SaleSetting::first()->update($this->all());
