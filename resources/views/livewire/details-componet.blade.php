@@ -29,7 +29,7 @@
                             </div>
                             <h2 class="product-name">{{$item->name}}</h2>
                             <div class="short-desc">
-                               <p>{{$item->short_description}}</p>
+                               <p>{!!$item->short_description!!}</p>
                             </div>
                             <div class="wrap-social">
                             	<a class="link-socail" href="#"><img src="{{asset('assets/images/social-list.png')}}" alt=""></a>
