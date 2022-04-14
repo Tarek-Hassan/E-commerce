@@ -99,7 +99,7 @@ $wItems=Cart::instance('wishlist')->content()->pluck('id');
 											<a href="#" class="btn add-to-cart" wire:click.prevent="store({{$item->id}},'{{$item->name}}',{{$item->regular_price}})">Add To Cart</a>
 											<div class="product-wish">
 											@if ($wItems->contains($item->id))
-											<a href="#" ><i class="fa fa-heart fil l-heart"></i></a>
+											<a href="#"  wire:click.prevent="removeFromWishlist({{$item->id}})"><i class="fa fa-heart fil l-heart"></i></a>
 											@else
 											<a href="#" wire:click.prevent="addToWishlist({{$item->id}},'{{$item->name}}',{{$item->regular_price}})"><i class="fa fa-heart"></i></a>
 											@endif

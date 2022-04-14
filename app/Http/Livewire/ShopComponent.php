@@ -41,6 +41,21 @@ class ShopComponent extends Component
         $this->emitTo('admin.home-category.wish-list-count-component','refreshComponent');
 
     }
+
+    public function removeFromWishlist($id){
+        foreach ( Cart::instance('wishlist')->content() as  $wItem) {
+         
+
+          if($wItem->id == $id){
+            Cart::instance('wishlist')->remove($wItem->rowId);
+            $this->emitTo('admin.home-category.wish-list-count-component','refreshComponent');
+            return;  
+            }
+        }
+
+
+    }
+
     public function render()
     {
 
