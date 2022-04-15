@@ -10,6 +10,7 @@ use App\Http\Livewire\ContactUsComponent;
 use App\Http\Livewire\DetailsComponet;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\SearchComponent;
+use App\Http\Livewire\WishListComponent;
 
 use App\Http\Livewire\User\UserDashboardComponent;
 
@@ -52,6 +53,7 @@ Route::get('/shop',ShopComponent::class)->name('product.shop');
 Route::get('/product/{slug}',DetailsComponet::class)->name('product.detail');
 Route::get('/product-category/{category_slug}',CategoryComponent::class)->name('product.category');
 Route::get('/search',SearchComponent::class)->name('product.search');
+Route::get('/wish-list',WishListComponent::class)->name('product.wishList');
 Route::get('/about-us',AboutUsComponent::class);
 Route::get('/contact-us',ContactUsComponent::class);
 // Route::middleware([

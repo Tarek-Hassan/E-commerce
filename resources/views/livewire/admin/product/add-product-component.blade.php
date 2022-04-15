@@ -98,24 +98,18 @@
                             </div>
 
                             <div class="row">
-                                <div class="form-group col-md-12">
+                                <div class="form-group col-md-12" wire:ignore>
                                     <label for="short_description">{{__('short_description')}}</label>
-                                    <input type="text" class="form-control" id="short_description"
-                                        name="short_description" wire:model.lazy="short_description">
+                                    <textarea  class="form-control" id="short_description"
+                                        name="short_description" wire:model="short_description"row="3"></textarea>
                                     @error('short_description') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
                         
                             <div class="row">
-                                {{-- <div class="form-group col-md-12" wire:ignore>
-                                    <label for="description">{{__('description')}}</label>
-                                    <textarea class="form-control " id="ckeditor" name="description"
-                                        wire:model="description" row="3"></textarea>
-                                    @error('description') <span class="error">{{ $message }}</span> @enderror
-                                </div> --}}
                                 <div class="form-group col-md-12" wire:ignore>
                                     <label for="description">{{__('description')}}</label>
-                                    <textarea class="form-control "  name="description"
+                                    <textarea class="form-control " id="description"  name="description"
                                         wire:model="description" row="3"></textarea>
                                     @error('description') <span class="error">{{ $message }}</span> @enderror
                                 </div>
@@ -137,19 +131,34 @@
 @push('scripts')
 
 <script>
-    // ClassicEditor.create(document.querySelector('#ckeditor'))
-    //     .then(editor => {
-    //         console.log(editor);
-    //         // let data=$(this).val();
-    // //          $this.set('description',data);
-    //     })
-    //     .on('change',function(e) {
-    //         console.log("ch");
-            
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     });
+     tinymce.init({
+      selector: 'textarea#short_description',
+      plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+      toolbar_mode: 'floating',
+      setup:function(editor){
+        editor.on('Change',function(e){
+              tinyMCE.triggerSave();
+              let sd=$('#short_description').val();
+              @this.set('short_description',sd);
+          });
+
+
+      }
+    });
+     tinymce.init({
+      selector: 'textarea#description',
+      plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+      toolbar_mode: 'floating',
+      setup:function(editor){
+        editor.on('Change',function(e){
+              tinyMCE.triggerSave();
+              let d=$('#description').val();
+              @this.set('description',d);
+          });
+
+
+      }
+    });
 
 </script>
 @endpush

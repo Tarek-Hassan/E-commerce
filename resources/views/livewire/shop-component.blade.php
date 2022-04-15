@@ -58,8 +58,11 @@
 
 					<div class="row">
 
-						<ul class="product-list grid-products equal-container">
 
+						<ul class="product-list grid-products equal-container">
+							@php
+								$wItems=Cart::instance('wishlist')->content()->pluck('id');	
+							@endphp
 							@forelse ( $items as $item )	
 								<li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
 									<div class="product product-style-3 equal-elem ">
@@ -73,7 +76,12 @@
 											<div class="wrap-price"><span class="product-price">${{$item->regular_price}}</span></div>
 											<a href="#" class="btn add-to-cart" wire:click.prevent="store({{$item->id}},'{{$item->name}}',{{$item->regular_price}})">Add To Cart</a>
 											<div class="product-wish">
-												<a href="#"><i class="fa fa-heart"></i></a>
+												
+											@if ($wItems->contains($item->id))
+											<a href="#"  wire:click.prevent="removeFromWishlist({{$item->id}})"><i class="fa fa-heart fill-heart"></i></a>
+											@else
+											<a href="#" wire:click.prevent="addToWishlist({{$item->id}},'{{$item->name}}',{{$item->regular_price}})"><i class="fa fa-heart"></i></a>
+											@endif
 											</div>
 										</div>
 									</div>
@@ -248,6 +256,30 @@
 	<!--main area-->
 
 </div>
+@push('styles')
+	<style>
+		.product-wish{
+			position: absolute;
+			top: 10%;
+			left: 0;
+			z-index: 99;
+			right: 30px;
+			text-align: right;
+			padding-top: 0;
+		}
+		.product-wish .fa{
+			color: #cbcbcb;
+			font-size: 32px;
+		}
+		.product-wish .fa:hover{
+			color: #ff7007 ;
+		}
+		.fill-heart{
+			color: #ff7007 !important;
+		}
+
+	</style>
+@endpush
 @push('scripts')
 	<script>
 		var slider = document.getElementById('slider');

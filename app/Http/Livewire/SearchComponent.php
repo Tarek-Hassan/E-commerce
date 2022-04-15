@@ -33,7 +33,7 @@ class SearchComponent extends Component
 
     public function store($id,$name,$price)
     {
-        Cart::add($id,$name,1,$price)->associate(Product::class);
+        Cart::instance('cart')->add($id,$name,1,$price)->associate(Product::class);
         session()->flash('success_message','Item Added to the Cart Successfully');
         return redirect()->route('product.cart');
     }

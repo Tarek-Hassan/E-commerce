@@ -26,13 +26,31 @@ class ShopComponent extends Component
 
     public function store($id,$name,$price)
     {
-        Cart::add($id,$name,1,$price)->associate(Product::class);
-        session()->flash('success_message','Item Added to the Cart Successfully');
-        return redirect()->route('product.cart');
+        Cart::instance('cart')->add($id,$name,1,$price)->associate(Product::class);
+        $this->emitTo('admin.home-category.cart-count-component','refreshComponent');
+        return redirect()->route('product.cart')->with('success_message','Item Added to the Cart Successfully');
 
     }
 
 
+
+    public function addToWishlist($id,$name,$price){
+
+        Cart::instance('wishlist')->add($id,$name,1,$price)->associate(Product::class);
+        $this->emitTo('admin.home-category.wish-list-count-component','refreshComponent');
+
+    }
+
+    public function removeFromWishlist($product_id){
+
+        foreach ( Cart::instance('wishlist')->content() as  $wItem) {
+          if($wItem->id == $product_id){
+            Cart::instance('wishlist')->remove($wItem->rowId);
+            $this->emitTo('admin.home-category.wish-list-count-component','refreshComponent');
+            return;  
+            }
+        }
+    }
 
     public function render()
     {
