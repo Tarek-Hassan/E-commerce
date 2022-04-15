@@ -28,7 +28,6 @@ class ShopComponent extends Component
     {
         Cart::instance('cart')->add($id,$name,1,$price)->associate(Product::class);
         $this->emitTo('admin.home-category.cart-count-component','refreshComponent');
-       
         return redirect()->route('product.cart')->with('success_message','Item Added to the Cart Successfully');
 
     }
@@ -42,18 +41,15 @@ class ShopComponent extends Component
 
     }
 
-    public function removeFromWishlist($id){
-        foreach ( Cart::instance('wishlist')->content() as  $wItem) {
-         
+    public function removeFromWishlist($product_id){
 
-          if($wItem->id == $id){
+        foreach ( Cart::instance('wishlist')->content() as  $wItem) {
+          if($wItem->id == $product_id){
             Cart::instance('wishlist')->remove($wItem->rowId);
             $this->emitTo('admin.home-category.wish-list-count-component','refreshComponent');
             return;  
             }
         }
-
-
     }
 
     public function render()
