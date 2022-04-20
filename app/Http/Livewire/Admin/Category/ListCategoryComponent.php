@@ -9,12 +9,8 @@ use App\Models\Category;
 class ListCategoryComponent extends Component
 {
     use WithPagination;
-    public $paginate;
-
-    public function mount(){
-        $this->paginate=5;
-        
-    }
+    
+    public $paginate=5;
 
     public function delete($id){
         $category=Category::findOrFail($id);

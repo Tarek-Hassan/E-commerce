@@ -11,17 +11,28 @@ use Carbon\Carbon;
 class DetailsComponet extends Component
 {
     public $slug;
+    public $qty;
 
     public function mount($slug){
         $this->slug=$slug;
+        $this->qty=1;
 
     }
     public function store($id,$name,$price)
     {
-        Cart::instance('cart')->add($id,$name,1,$price)->associate(Product::class);
-        session()->flash('success_message','Item Added to the Cart Successfully');
+        Cart::instance('cart')->add($id,$name,$this->qty,$price)->associate(Product::class);
+        session()->flash('success_message',__('created'));
         return redirect()->route('product.cart');
+    }
+    
+    public function reduceQty(){
+        if($this->qty > 1){
+            $this->qty--;
+        }
+    }
 
+    public function increaseQty(){
+        $this->qty++;
     }
     public function render()
     {

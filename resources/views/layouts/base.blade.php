@@ -200,6 +200,9 @@
                                             <a title="Products" href="{{route('admin.products')}}">Products</a>
                                         </li>
                                         <li class="menu-item">
+                                            <a title="Coupons" href="{{route('admin.coupons')}}">Coupons</a>
+                                        </li>
+                                        <li class="menu-item">
                                             <a title="Home Sliders" href="{{route('admin.homeSliders')}}">Home Sliders</a>
                                         </li>
                                         <li class="menu-item">

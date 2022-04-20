@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Cart;
+use App\Models\Product;
 
 class WishListComponent extends Component
 {
@@ -15,11 +16,12 @@ class WishListComponent extends Component
         // return redirect()->route('product.wishList')->with('success_message',__("removed_wishlist_item"));
     }
 
-    public function store($id,$name,$price)
+    public function store($rowId,$id,$name,$price)
     {
+        $this->removeFromWishlist($rowId);
         Cart::instance('cart')->add($id,$name,1,$price)->associate(Product::class);
         $this->emitTo('admin.home-category.cart-count-component','refreshComponent');
-        return redirect()->route('product.cart')->with('success_message',__('created'));
+        // return redirect()->route('product.cart')->with('success_message',__('created'));
 
     }
 
