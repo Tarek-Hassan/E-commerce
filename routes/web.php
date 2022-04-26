@@ -35,6 +35,8 @@ use App\Http\Livewire\Admin\Coupon\EditCouponComponent;
 
 use App\Http\Livewire\Admin\HomeCategory\HomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\HomeSaleSettingComponent;
+use App\Http\Livewire\Admin\HomeCategory\OrderComponent;
+use App\Http\Livewire\Admin\HomeCategory\OrderDetailsComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,7 +105,9 @@ Route::middleware(['auth:sanctum','authAdmin','verified'])->prefix('admin/')->na
 
         Route::get('home-category/',HomeCategoryComponent::class )->name('homeCategories');
         Route::get('home-sale-setting/',HomeSaleSettingComponent::class )->name('homeSaleSetting');
-
+        
+        Route::get('orders',OrderComponent::class )->name('orders');
+        Route::get('order/{id}',OrderDetailsComponent::class )->name('orderDetails');
 
 });
 // for User
