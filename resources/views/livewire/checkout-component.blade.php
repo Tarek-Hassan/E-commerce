@@ -70,7 +70,7 @@
 										</p>
 										<p class="row-in-form fill-wife">
 											<label class="checkbox-field">
-												<input  id="different-add" value="1" type="checkbox" wire:model="is_shipping_different">
+												<input  value="1" type="checkbox" wire:model="is_shipping_different">
 												<span>Ship to a different address?</span>
 											</label>
 										</p>
@@ -133,12 +133,7 @@
 											<input  type="number" wire:model.lazy="_zipcode" value="" placeholder="Your postal code">
 											 @error('_zipcode') <span class="error">{{ $message }}</span> @enderror
 										</p>
-										<p class="row-in-form fill-wife">
-											<label class="checkbox-field">
-												<input  id="different-add" value="1" type="checkbox" wire:model="is_shipping_different">
-												<span>Ship to a different address?</span>
-											</label>
-										</p>
+									
 									</div>
 							</div>
 						</div>

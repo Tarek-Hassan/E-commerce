@@ -188,8 +188,6 @@ class CheckoutComponent extends Component
                         ],
                         'shipping'=>[
                             'name'=>$this->_firstname.' '.$this->_lastname,
-                            'email'=>$this->_email,
-                            'phone'=>$this->_mobile,
                             'address'=>[
                                 'line1'=>$this->_line1,
                                 'postal_code'=>$this->_zipcode,
@@ -206,7 +204,7 @@ class CheckoutComponent extends Component
                         'customer'=>$customer['id'],
                         'currency'=>'USD',
                         'amount'=>session()->get('checkout')['total'],
-                        'descripion'=>'payment for order no '.$order->id
+                        'description'=>'payment for order no '.$order->id
                     ]);
 
                     if($charge['status']=='succeeded'){
