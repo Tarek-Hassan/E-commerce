@@ -11,6 +11,7 @@ use App\Http\Livewire\DetailsComponet;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\WishListComponent;
+use App\Http\Livewire\ThankComponent;
 
 use App\Http\Livewire\User\UserDashboardComponent;
 
@@ -60,6 +61,7 @@ Route::get('/search',SearchComponent::class)->name('product.search');
 Route::get('/wish-list',WishListComponent::class)->name('product.wishList');
 Route::get('/about-us',AboutUsComponent::class);
 Route::get('/contact-us',ContactUsComponent::class);
+Route::get('/thank',ThankComponent::class)->name('thank');
 // Route::middleware([
 //     'auth:sanctum',
 //     config('jetstream.auth_session'),
