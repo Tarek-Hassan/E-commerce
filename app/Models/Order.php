@@ -12,7 +12,7 @@ class Order extends Model
     protected $fillable=[
             'firstname','lastname','mobile','email','line1',
             'line2','city','province','country','zipcode',
-            'subtotal','discount','tax','total','firstname',
+            'subtotal','discount','tax','total',
             'status','is_shipping_different','user_id',
         ];
 
@@ -20,7 +20,7 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function orderItem(){
+    public function orderItems(){
         return $this->hasMany(OrderItem::class);
     }
 
