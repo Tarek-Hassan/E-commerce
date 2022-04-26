@@ -162,7 +162,7 @@ class CheckoutComponent extends Component
                 try {
             
                     $stripe=Stripe::make(env('STRIPE_KEY'));
-                    $token=$stripe->token()->create([
+                    $token=$stripe->tokens()->create([
                         'card'=>[
                             'number'=>$this->card_no,
                             'exp_month'=>$this->exp_month,

@@ -172,7 +172,7 @@
 									</p>
 									<p class="row-in-form">
 										<label for="cvc">CVC:-<span>*</span></label>
-										<input  type="text" wire:model.lazy="cvc" value="" placeholder="cvc">
+										<input  type="password" wire:model.lazy="cvc" value="" placeholder="cvc">
 										@error('cvc') <span class="error">{{ $message }}</span> @enderror
 									</p>
 								</div>
