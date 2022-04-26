@@ -32,4 +32,14 @@ class Order extends Model
         return $this->hasOne(Transaction::class);
     }
 
+    public function status(){
+
+        if($this->status=='ordered'){
+            return "<span class='label label-info'>".__('ordered')."</span>";
+        }elseif($this->status=='delivered'){
+             return "<span class='label label-success'>".__('delivered')."</span>";
+         }
+         return "<span class='label label-danger'>".__('canceled')."</span>";
+     }
+
 }
