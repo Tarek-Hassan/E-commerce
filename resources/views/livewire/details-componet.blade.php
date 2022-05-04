@@ -19,14 +19,28 @@
 							</div>
 						</div>
 						<div class="detail-info">
-							<div class="product-rating">
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <a href="#" class="count-review">(05 review)</a>
-                            </div>
+							@if ($item->orderItems)
+								<div class="product-rating">
+									@php
+										$avgrating=0;
+									@endphp
+
+									@foreach ($item->orderItems->where('status',1) as $orderItem  )
+										@php
+									
+											$avgrating += optional($orderItem->review)->rating;
+										@endphp
+									@endforeach
+									@for ($i=1;$i<=5;$i++)
+										@if ($i <= $avgrating)
+											<i class="fa fa-star" aria-hidden="true"></i>
+										@else
+											<i class="fa fa-star color-gray" aria-hidden="true"></i>
+										@endif
+									@endfor
+									<a href="#" class="count-review">({{$item->orderItems->where('status',1)->count()}} review)</a>
+								</div>
+							@endif
                             <h2 class="product-name">{{$item->name}}</h2>
                             <div class="short-desc">
                                <p>{!!$item->short_description!!}</p>
@@ -94,30 +108,32 @@
 									<div class="wrap-review-form">
 										
 										<div id="comments">
-											<h2 class="woocommerce-Reviews-title">01 review for <span>Radiant-360 R6 Chainsaw Omnidirectional [Orage]</span></h2>
+											<h2 class="woocommerce-Reviews-title">{{$item->orderItems->where('status',1)->count()}} review for <span>{{$item->name}}</span></h2>
 											<ol class="commentlist">
+												@foreach ($item->orderItems->where('status',1) as $orderItem  )
 												<li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1" id="li-comment-20">
 													<div id="comment-20" class="comment_container"> 
 														<img alt="" src="{{asset('assets/images/author-avata.jpg')}}" height="80" width="80">
 														<div class="comment-text">
 															<div class="star-rating">
-																<span class="width-80-percent">Rated <strong class="rating">5</strong> out of 5</span>
+																<span class="width-{{optional($orderItem->review)->rating * 20}}-percent">Rated <strong class="rating">{{optional($orderItem->review)->rating}}</strong> out of 5</span>
 															</div>
 															<p class="meta"> 
-																<strong class="woocommerce-review__author">admin</strong> 
+																<strong class="woocommerce-review__author">{{optional(optional($orderItem->review)->user)->name}}</strong> 
 																<span class="woocommerce-review__dash">–</span>
-																<time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >Tue, Aug 15,  2017</time>
+																<time class="woocommerce-review__published-date" datetime="2008-02-14 20:00" >{{Carbon\Carbon::parse(optional($orderItem->review)->create_at)->format('d F Y g:i A')}}</time>
 															</p>
 															<div class="description">
-																<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+																<p>{{optional($orderItem->review)->comment}}</p>
 															</div>
 														</div>
 													</div>
 												</li>
+												@endforeach
 											</ol>
 										</div><!-- #comments -->
 
-										<div id="review_form_wrapper">
+										{{-- <div id="review_form_wrapper">
 											<div id="review_form">
 												<div id="respond" class="comment-respond"> 
 
@@ -161,7 +177,8 @@
 
 												</div><!-- .comment-respond-->
 											</div><!-- #review_form -->
-										</div><!-- #review_form_wrapper -->
+										</div> --}}
+										<!-- #review_form_wrapper -->
 
 									</div>
 								</div>
@@ -276,4 +293,12 @@
 		</div><!--end container-->
 
 	</main>
+	@push("styles")
+	<style>
+		.color-gray{
+			color:#e6e6e6 !important;
+		}
+	</style>
+		
+	@endpush
 
