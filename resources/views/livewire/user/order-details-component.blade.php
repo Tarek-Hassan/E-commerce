@@ -5,7 +5,7 @@
                 <div class="panel panel-default">
                     <ul class="nav">
                         <li class="nav-item">
-                            <a href="{{route('admin.orders')}}" class="nav-link active">{{__('orders')}} </a>
+                            <a href="{{route('user.orders')}}" class="nav-link active">{{__('orders')}} </a>
                         </li>
                     </ul>
                     <div class="panel-heading">
@@ -13,6 +13,11 @@
                             <div class="col-md-6">
                                 Order Details
                             </div>
+                            @if ($order->status=='ordered')                               
+                                <div class="col-md-6">
+                                    <button class="btn btn-danger" onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="cancelOrder" > Cancel Order</button>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="panel-body">
@@ -39,7 +44,6 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="panel panel-default">
-                   
                     <div class="panel-heading">
                         Order Items
                     </div>
@@ -65,6 +69,9 @@
 
                                             </div>
                                             <div class="price-field sub-total"><p class="price">${{$item->price * $item->quantity}}</p></div>
+                                            @if ($order->status=='delivered' && !$item->status)
+                                                <div class="price-field sub-total"><p class="price"><a href="{{route('user.orderReview',['id'=>$item->id])}}">Write Review</a></p></div>
+                                            @endif
                                         </li>
 
                                     @endforeach							

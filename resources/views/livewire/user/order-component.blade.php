@@ -18,9 +18,9 @@
                         </div>
                     @endif
                         <div class="table-responsive">
-                            <div class="col-md-12 text-right mb-5">
+                            {{-- <div class="col-md-12 text-right mb-5">
                             <a href="{{route('admin.addcoupon')}}" class="btn btn-primary">{{__('create_new')}}</a>
-                            </div>
+                            </div> --}}
                             <table class="table user-list">
                                 <thead>
                                     <tr>
@@ -37,7 +37,7 @@
                                         <th><span>{{__('email')}}</span></th>
                                         <th><span>{{__('zipcode')}}</span></th>
                                         <th><span>{{__('status')}}</span></th>
-                                        <th colspan="2" class="text-center"><span>{{__('action')}}</span></th>
+                                        <th><span>{{__('action')}}</span></th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
@@ -59,23 +59,20 @@
                                             {!!$item->status()!!}
                                         </td>
                                         <td>
-                                            <a href="{{route('admin.orderDetails',['id'=>$item->id])}}"
-                                                    data-toggle="tooltip" data-placement="top" title=""
-                                                    data-original-title="edit">
-                                                    <i class="fa fa-eye fa-2x text-success"></i>
-                                            </a>
-                                           
-                                        </td>
-                                        <td>
-                                            <div class="dropdown">
-                                                <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown">Status <span class="cart"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <li> <a href="#" wire:click.prevent="UpdateOrderStatus({{$item->id}},'delivered')">{{__('delivered')}}</a></li>
-                                                    <li> <a href="#" wire:click.prevent="UpdateOrderStatus({{$item->id}},'canceled')">{{__('canceled')}}</a></li>
-                                                </ul>
-                                            </div>
-                                        </td>
 
+                                              
+                                                    <a href="{{route('user.orderDetails',['id'=>$item->id])}}"
+                                                        data-toggle="tooltip" data-placement="top" title=""
+                                                        data-original-title="edit">
+                                                        <i class="fa fa-eye fa-2x text-success"></i>
+                                                    </a>
+{{-- 
+                                                    <a href="#"  onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{$item->id}})" >
+                                                        <i class="fa-2x fa fa-trash-o text-danger"></i>
+                                                    </a> --}}
+                                               
+
+                                        </td>
                                     </tr>
                                     @empty
                                     <tr>

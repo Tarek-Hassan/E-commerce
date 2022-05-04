@@ -14,6 +14,9 @@ use App\Http\Livewire\WishListComponent;
 use App\Http\Livewire\ThankComponent;
 
 use App\Http\Livewire\User\UserDashboardComponent;
+use App\Http\Livewire\User\UserOrderComponent;
+use App\Http\Livewire\User\UserOrderDetailsComponent;
+use App\Http\Livewire\User\ReviewComponent;
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 
@@ -111,6 +114,9 @@ Route::middleware(['auth:sanctum','authAdmin','verified'])->prefix('admin/')->na
 
 });
 // for User
-Route::middleware(['auth:sanctum', 'verified'])->name('user.')->group(function(){
-    Route::get('/user/dashboard',UserDashboardComponent::class )->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->prefix('user/')->name('user.')->group(function(){
+    Route::get('/dashboard',UserDashboardComponent::class )->name('dashboard');
+    Route::get('orders',UserOrderComponent::class )->name('orders');
+    Route::get('order/{id}',UserOrderDetailsComponent::class )->name('orderDetails');
+    Route::get('review/{id}',ReviewComponent::class )->name('orderReview');
 });

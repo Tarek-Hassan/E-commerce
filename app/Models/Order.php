@@ -14,6 +14,7 @@ class Order extends Model
             'line2','city','province','country','zipcode',
             'subtotal','discount','tax','total',
             'status','is_shipping_different','user_id',
+            'delivered_at','canceled_at'
         ];
 
     public function user(){
@@ -40,6 +41,15 @@ class Order extends Model
              return "<span class='label label-success'>".__('delivered')."</span>";
          }
          return "<span class='label label-danger'>".__('canceled')."</span>";
-     }
+    }
+    public function statusDate(){
+
+        if($this->status=='canceled'){
+            return $this->canceled_at;
+        }elseif($this->status=='delivered'){
+            return $this->delivered_at;
+        }
+         return "--";
+    }
 
 }
