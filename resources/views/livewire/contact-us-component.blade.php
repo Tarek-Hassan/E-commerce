@@ -15,47 +15,41 @@
 					<div class="wrap-contacts ">
 						<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 							<div class="contact-box contact-form">
+
 								<h2 class="box-title">Leave a Message</h2>
-								<form action="#" method="get" name="frm-contact">
+								@if (Session::has('success_message'))
+									<div class="alert alert-success">
+										<strong>{{__('success')}} </strong>{{Session::get('success_message')}}
+					
+									</div>
+								@endif
+								<form action=" "  name="frm-contact" wire:submit.prevent="send">
 
 									<label for="name">Name<span>*</span></label>
-									<input type="text" value="" id="name" name="name" >
+									<input type="text" value="" id="name" name="name" wire:model="name">
+									@error('name') <span class="error">{{ $message }}</span> @enderror
+									<br/>
 
 									<label for="email">Email<span>*</span></label>
-									<input type="text" value="" id="email" name="email" >
-
+									<input type="text" value="" id="email" name="email" wire:model="email">
+									@error('email') <span class="error">{{ $message }}</span> @enderror
+									<br/>
 									<label for="phone">Number Phone</label>
-									<input type="text" value="" id="phone" name="phone" >
-
+									<input type="text" value="" id="phone" name="phone" wire:model="phone">
+									@error('phone') <span class="error">{{ $message }}</span> @enderror
+									<br/>
 									<label for="comment">Comment</label>
-									<textarea name="comment" id="comment"></textarea>
-
+									<textarea name="comment" id="comment" wire:model="comment"></textarea>
+									@error('comment') <span class="error">{{ $message }}</span> @enderror
+									<br/>
 									<input type="submit" name="ok" value="Submit" >
-									
 								</form>
 							</div>
 						</div>
 						<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
 							<div class="contact-box contact-info">
 								<div class="wrap-map">
-									<div class="mercado-google-maps"
-										 id="az-google-maps57341d9e51968"
-										 data-hue=""
-										 data-lightness="1"
-										 data-map-style="2"
-										 data-saturation="-100"
-										 data-modify-coloring="false"
-										 data-title_maps="Kute themes"
-										 data-phone="088-465 9965 02"
-										 data-email="kutethemes@gmail.com"
-										 data-address="Z115 TP. Thai Nguyen"
-										 data-longitude="-0.120850"
-										 data-latitude="51.508742"
-										 data-pin-icon=""
-										 data-zoom="16"
-										 data-map-type="ROADMAP"
-										 data-map-height="263">
-									</div>
+									<iframe src="{{optional($setting)->map}}" width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 								</div>
 								<h2 class="box-title">Contact Detail</h2>
 								<div class="wrap-icon-box">
@@ -64,7 +58,7 @@
 										<i class="fa fa-envelope" aria-hidden="true"></i>
 										<div class="right-info">
 											<b>Email</b>
-											<p>Support1@Mercado.com</p>
+											<p>{{optional($setting)->email}}</p>
 										</div>
 									</div>
 
@@ -72,15 +66,15 @@
 										<i class="fa fa-phone" aria-hidden="true"></i>
 										<div class="right-info">
 											<b>Phone</b>
-											<p>0123-465-789-111</p>
+											<p>{{optional($setting)->phone}} - {{optional($setting)->phone2}}</p>
 										</div>
 									</div>
 
 									<div class="icon-box-item">
 										<i class="fa fa-map-marker" aria-hidden="true"></i>
 										<div class="right-info">
-											<b>Mail Office</b>
-											<p>Sed ut perspiciatis unde omnis<br />Street Name, Los Angeles</p>
+											<b>Address</b>
+											<p>{{optional($setting)->address}}</p>
 										</div>
 									</div>
 
