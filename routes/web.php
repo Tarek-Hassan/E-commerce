@@ -20,6 +20,9 @@ use App\Http\Livewire\User\ReviewComponent;
 use App\Http\Livewire\User\ChangePassword;
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\ContactComponent;
+use App\Http\Livewire\Admin\AboutComponent;
+use App\Http\Livewire\Admin\SettingComponent;
 
 use App\Http\Livewire\Admin\Category\ListCategoryComponent;
 use App\Http\Livewire\Admin\Category\AddCategoryComponent;
@@ -65,8 +68,8 @@ Route::get('/product/{slug}',DetailsComponet::class)->name('product.detail');
 Route::get('/product-category/{category_slug}',CategoryComponent::class)->name('product.category');
 Route::get('/search',SearchComponent::class)->name('product.search');
 Route::get('/wish-list',WishListComponent::class)->name('product.wishList');
-Route::get('/about-us',AboutUsComponent::class);
-Route::get('/contact-us',ContactUsComponent::class);
+Route::get('/about-us',AboutUsComponent::class)->name('about-us');
+Route::get('/contact-us',ContactUsComponent::class)->name('contact-us');
 Route::get('/thank',ThankComponent::class)->name('thank');
 // Route::middleware([
 //     'auth:sanctum',
@@ -112,6 +115,10 @@ Route::middleware(['auth:sanctum','authAdmin','verified'])->prefix('admin/')->na
         
         Route::get('orders',OrderComponent::class )->name('orders');
         Route::get('order/{id}',OrderDetailsComponent::class )->name('orderDetails');
+
+        Route::get('contactus',ContactComponent::class)->name('contactus');
+        Route::get('about',AboutComponent::class)->name('about');
+        Route::get('setting',SettingComponent::class)->name('setting');
 
 });
 // for User
