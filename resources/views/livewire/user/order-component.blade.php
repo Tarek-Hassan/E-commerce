@@ -24,7 +24,6 @@
                             <table class="table user-list">
                                 <thead>
                                     <tr>
-                                        {{-- <th><span>#</span></th> --}}
                                         <th><span>{{__('order_no')}}</span></th>
                                         <th><span>{{__('order_date')}}</span></th>
                                         <th><span>{{__('first_name')}}</span></th>
@@ -66,10 +65,6 @@
                                                         data-original-title="edit">
                                                         <i class="fa fa-eye fa-2x text-success"></i>
                                                     </a>
-{{-- 
-                                                    <a href="#"  onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{$item->id}})" >
-                                                        <i class="fa-2x fa fa-trash-o text-danger"></i>
-                                                    </a> --}}
                                                
 
                                         </td>

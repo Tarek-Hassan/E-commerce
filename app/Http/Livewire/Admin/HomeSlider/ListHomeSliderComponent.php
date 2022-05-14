@@ -21,6 +21,9 @@ class ListHomeSliderComponent extends Component
     public function delete($id){
         $homeSlider=HomeSlider::find($id);
         if($homeSlider){
+            if ($homeSlider->image){
+                unlink($homeSlider->image);
+            }
             $homeSlider->delete();
             return redirect()->route("admin.homeSliders")->with('success_message',__('deleted'));
         }

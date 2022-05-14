@@ -8,12 +8,25 @@
 				<div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
 					<div class="wrap-product-detail">
 						<div class="detail-media">
-							<div class="product-gallery">
+							<div class="product-gallery" wire:ignore>
 							  <ul class="slides">
 
 							    <li data-thumb="{{asset($item->image)}}">
 							    	<img src="{{asset($item->image)}}" alt="{{$item->name}}" />
 							    </li>
+								
+								 @if ($item->images)
+									@php
+										$images=explode(",",$item->images);
+									@endphp
+									
+									@foreach ($images  as $image)
+										<li data-thumb="{{asset($image)}}">
+											<img src="{{asset($image)}}" />
+										</li>
+									@endforeach
+								@endif 
+
                                 
 							  </ul>
 							</div>

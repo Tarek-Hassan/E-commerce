@@ -27,6 +27,27 @@
                               
                                 @endif
                             </div>
+                            <div class="row">
+                                <div class="form-group col-md-8">
+                                    <label for="name">{{__('product_gallary')}}</label>
+                                    <input type="file" class="input-file" name="image" multiple wire:model="galary_images" />
+                                    @error('image') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                @if ($galary_images)
+                                <div class="form-group col-md-4">
+                                    @foreach ($galary_images as $image)
+                                    <img src="{{asset($image->temporaryUrl())}}"  width="120px"/> 
+                                    @endforeach
+                                </div>
+                               
+                                @elseif($images)
+                                <div class="form-group col-md-4">
+                                    @foreach ($images as $image)
+                                    <img src="{{asset($image)}}"  width="120px"/> 
+                                    @endforeach
+                                </div>
+                                @endif
+                            </div>
 
                             <div class="row">
                                 <div class="form-group col-md-4">
