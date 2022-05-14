@@ -19,6 +19,17 @@ class ListProductComponent extends Component
     public function delete($id){
 
         $product=Product::findOrFail($id);
+       
+
+        if ($product->image){
+            unlink($product->image);
+        }
+        if ($product->images){
+            $images=explode(",",$product->images);
+            foreach ($images  as $image){
+                unlink($image);
+            }
+        }
         $product->delete();
 
         return redirect()->back()->with('success_message',__('deleted'));

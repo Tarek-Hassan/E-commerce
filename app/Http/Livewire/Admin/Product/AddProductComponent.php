@@ -23,6 +23,7 @@ class AddProductComponent extends Component
     public $featured=0;
     public $short_description;
     public $description;
+    public $images;
 
     protected function rules(){
         return [
@@ -83,8 +84,19 @@ class AddProductComponent extends Component
     public function store(){
 
         $this->validate();
-
         $this->image='storage/'.$this->image->store('products','public');
+        if($this->images){
+            $last_key = array_key_last($this->images);
+            $image_names='';
+            foreach ($this->images as $key=>$value) {
+                $image_names .='storage/'.$value->store('products','public');
+                if ($key != $last_key) {
+                    $image_names .=',';
+                }
+            }
+            $this->images=$image_names;
+           
+        }
         Product::create($this->all());
        return redirect()->route("admin.products")->with("success_message",__('created'));
     }

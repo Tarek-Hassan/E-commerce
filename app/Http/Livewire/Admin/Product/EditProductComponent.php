@@ -24,7 +24,9 @@ class EditProductComponent extends Component
     public $featured;
     public $short_description;
     public $description;
+    public $images;
     public $new_img;
+    public $galary_images;
 
 
     public function mount($slug){
@@ -44,6 +46,7 @@ class EditProductComponent extends Component
             $this->featured=$this->product->featured;
             $this->short_description=$this->product->short_description;
             $this->description=$this->product->description;
+            $this->images=explode(',',$this->product->images);
             
         }else{
             return redirect()->route("admin.products")->with('error_message',__('not_found'));
@@ -107,10 +110,31 @@ class EditProductComponent extends Component
 
     }
 
+
     public function update(){
         $this->validate();
         if($this->new_img){
+            unlink($this->image);
             $this->image='storage/'.$this->new_img->store('products','public');
+        }
+       
+        if($this->galary_images){
+            if($this->images){
+                foreach ($this->images as $image) {
+                    unlink($image);
+                }
+            }
+            $last_key = array_key_last($this->galary_images);
+            $image_names='';
+            foreach ($this->galary_images as $key=>$value) {
+                $image_names .='storage/'.$value->store('products','public');
+                if ($key != $last_key) {
+                    $image_names .=',';
+                }
+            }
+            $this->images=$image_names;
+        }else{
+            $this->images=implode(',',$this->images);
         }
         $this->product->update($this->all());
         return redirect()->route("admin.products")->with('success_message',__('updated'));

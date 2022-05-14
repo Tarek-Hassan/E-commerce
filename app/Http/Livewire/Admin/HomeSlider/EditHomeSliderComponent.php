@@ -72,6 +72,7 @@ class EditHomeSliderComponent extends Component
         $this->validate();
 
         if($this->new_image){
+            unlink($this->image);
             $this->image='storage/'.$this->new_image->store('HomeSlider','public');
         }
         $this->slider->update($this->all());
