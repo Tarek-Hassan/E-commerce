@@ -4,11 +4,13 @@ namespace App\Http\Livewire\Admin\Category;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Support\Str;
 class AddCategoryComponent extends Component
 {
     public $name;
     public $slug;
+    public $category_id;
 
     public function generateSlug(){
         $this->slug=str::slug($this->name);
@@ -40,11 +42,17 @@ class AddCategoryComponent extends Component
         // $this->validateOnly();
         $this->validate();
         
-        Category::create($this->all());
+        if($this->category_id){
+            SubCategory::create($this->all());
+        }else{
+            Category::create($this->all());
+        }
         return redirect()->route('admin.categories')->with('success_message',__('created'));
     }
     public function render()
     {
-        return view('livewire.admin.category.add-category-component')->layout('layouts.base');
+        return view('livewire.admin.category.add-category-component',[
+            'categories'=>Category::all(),
+        ])->layout('layouts.base');
     }
 }

@@ -9,8 +9,10 @@ use App\Models\Shipping;
 use App\Models\Transaction;
 use  Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Cart;
 use Stripe;
+use App\Mail\OrderMail;
 
 
 class CheckoutComponent extends Component
@@ -84,8 +86,8 @@ class CheckoutComponent extends Component
 
     public function store(){
         $this->validate();
-       
-        DB::transaction( function(){
+       $order= new Order;
+        DB::transaction( function() use(&$order){
             $order=Order::create([
                         'firstname'=>$this->firstname,
                         'lastname'=>$this->lastname,
@@ -224,6 +226,7 @@ class CheckoutComponent extends Component
 
 
         });
+        $this->sendOrderConfirmationMail($order);
  
     }
     public function resetCart(){
@@ -238,6 +241,10 @@ class CheckoutComponent extends Component
             'mode'=>$this->paymentmode,
             'status'=>$status,
         ]);
+
+    }
+    public function sendOrderConfirmationMail($order){
+        Mail::to($order->email)->send(new OrderMail($order));
 
     }
     public function verifyForCheckout(){
