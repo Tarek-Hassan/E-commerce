@@ -103,14 +103,16 @@
                      <div class="widget-content">
                          <ul class="list-category">
                              @foreach ($Categories as $category)
-                                 <li class="category-item has-child-cate">
+                                 <li class="category-item {{count($category->subCategories) > 0 ? 'has-child-cate':''}} ">
                                      <a href="{{route('product.category',['category_slug'=>$category->slug])}}" class="cate-link">{{$category->name}}</a>
-                                     <span class="toggle-control">+</span>
-                                     <ul class="sub-cate">
-                                         <li class="category-item"><a href="#" class="cate-link">Batteries (22)</a></li>
-                                         <li class="category-item"><a href="#" class="cate-link">Headsets (16)</a></li>
-                                         <li class="category-item"><a href="#" class="cate-link">Screen (28)</a></li>
-                                     </ul>
+                                     @if (count($category->subCategories) > 0)	
+                                        <span class="toggle-control">+</span>
+                                        <ul class="sub-cate">
+                                            @foreach ($category->subCategories as $subCategory)
+                                            <li class="category-item"><a href="{{route('product.category',['category_slug'=>$category->slug,'scategory_slug'=>$subCategory->slug])}}" class="cate-link">{{$subCategory->name}} (22)</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                  </li>
                              @endforeach
 
