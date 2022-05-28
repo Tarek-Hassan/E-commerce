@@ -88,7 +88,7 @@ Route::middleware(['auth:sanctum','authAdmin','verified'])->prefix('admin/')->na
     Route::prefix('categories/')->group(function(){
         Route::get('',ListCategoryComponent::class )->name('categories');
         Route::get('create',AddCategoryComponent::class )->name('addcategory');
-        Route::get('edit/{slug}',EditCategoryComponent::class )->name('editcategory');
+        Route::get('edit/{slug}/{scategory_slug?}',EditCategoryComponent::class )->name('editcategory');
     });
 
     Route::prefix('products/')->group(function(){

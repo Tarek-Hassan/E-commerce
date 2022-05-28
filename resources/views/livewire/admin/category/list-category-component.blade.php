@@ -27,16 +27,33 @@
                                         <th><span>#</span></th>
                                         <th><span>{{__('name')}}</span></th>
                                         <th><span>{{__('slug')}}</span></th>
+                                        <th><span>{{__('Sub Categories')}}</span></th>
                                         <th><span>{{__('action')}}</span></th>
                                     </tr>
                                 </thead>
                                 <tbody class="table-body">
                                     @forelse ($items as $item )
+                                
 
                                     <tr class="cell-1">
                                         <td class="text-center">{{$item->id}}</td>
                                         <td>{{$item->name}}</td>
                                         <td>{{$item->slug}}</td>
+                                        <td>
+                                            <ul>
+                                                @foreach ( $item->subCategories as $subCategory )
+                                                    <li>
+                                                        {{$subCategory->name}}
+                                                        <a href="{{route('admin.editcategory',['slug'=>$item->slug,'scategory_slug'=>$subCategory->slug])}}">
+                                                            <i class="fa fa-pencil-square-o fa-lg text-success"></i>
+                                                        </a>
+                                                        <a href="#"  onclick="confirm('Are you sure?') || event.stopImmediatePropagation()" wire:click.prevent="deleteSubcategory({{$subCategory->id}})" >
+                                                            <i class="fa-lg fa fa-trash-o text-danger"></i>
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </td>
                                         <td>
 
                                               

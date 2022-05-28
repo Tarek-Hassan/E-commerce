@@ -11,7 +11,7 @@
 				</ul>
 			</div>
 			<div class=" main-content-area">
-				<form wire:submit.prevent="store">
+				<form wire:submit.prevent="store" onsubmit="$('#processing').show();">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="wrap-address-billing">
@@ -192,10 +192,20 @@
 								</label>
 								@error('paymentmode') <span class="error">{{ $message }}</span> @enderror
 							</div>
-							@if (session()->has('checkout'))
-								
-							@endif
-							 <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{number_format(session()->get('checkout')['total'],2)}}</span></p>
+
+								@if (session()->has('checkout'))
+								{{-- <p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{number_format(session()->get('checkout')['total'],2)}}</span></p> --}}
+								<p class="summary-info grand-total"><span>Grand Total</span> <span class="grand-total-price">${{session()->get('checkout')['total']}}</span></p>
+								@endif
+								@if ($errors->isEmpty())
+									<div wire:ignore id="processing" style="font-size: 22px;margin-bottom: 20px; padding-left: 37px; color:green; display:none">
+										<i class="fa fa-spinner fa-luse fa-fw"></i>
+										<span>Processing .....</span>
+
+									</div>
+									
+								@endif
+
 							<button type="submit" class="btn btn-medium">Place order now</button>
 						</div>
 						<div class="summary-item shipping-method">

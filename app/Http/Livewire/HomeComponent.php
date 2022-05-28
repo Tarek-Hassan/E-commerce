@@ -10,6 +10,7 @@ use App\Models\HomeCategory;
 use App\Models\Category;
 use App\Models\SaleSetting;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class HomeComponent extends Component
 {
@@ -23,7 +24,10 @@ class HomeComponent extends Component
         $saleSetting=SaleSetting::where('status',true)->first();
 
         $sale_date= $saleSetting ? Carbon::parse($saleSetting->sale_date)->format('Y/m/d h:m:s') : null ;
-
+        if(Auth::check()){
+            Cart::instance('cart')->restore(Auth::user()->email);
+            Cart::instance('wishlist')->restore(Auth::user()->email);
+        }
         return view('livewire.home-component',[
             'sliders'=>HomeSlider::all(),
             'lproducts'=>Product::orderByDesc('created_at')->take(8)->get(),

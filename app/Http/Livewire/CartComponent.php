@@ -130,7 +130,7 @@ class CartComponent extends Component
         }
             return redirect()->route('login');
     }
-    public function setAmountForCcheckout(){
+    public function setAmountForCheckout(){
         if(!Cart::instance('cart')->count() > 0){
             session()->forget('checkout');
             return;
@@ -174,9 +174,14 @@ class CartComponent extends Component
         }
 
         // dd(Cart::instance('cart')->subtotal(),floatval(Cart::instance('cart')->subtotal()));
-        $this->setAmountForCcheckout();
-        
+        $this->setAmountForCheckout();
         $most_viewed_product=Product::inRandomOrder()->limit(8)->get();
+
+        if(Auth::check()){
+            Cart::instance('cart')->store(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+        }
+        
         return view('livewire.cart-component',[
             'items'=>$most_viewed_product
         ])->layout('layouts.base');
