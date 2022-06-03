@@ -18,6 +18,8 @@ use App\Http\Livewire\User\UserOrderComponent;
 use App\Http\Livewire\User\UserOrderDetailsComponent;
 use App\Http\Livewire\User\ReviewComponent;
 use App\Http\Livewire\User\ChangePassword;
+use App\Http\Livewire\User\Profile\ShowComponent;
+use App\Http\Livewire\User\Profile\EditComponent;
 
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\ContactComponent;
@@ -65,7 +67,7 @@ Route::get('/cart',CartComponent::class)->name('product.cart');
 Route::get('/checkout',CheckoutComponent::class)->name('product.checkout');
 Route::get('/shop',ShopComponent::class)->name('product.shop');
 Route::get('/product/{slug}',DetailsComponet::class)->name('product.detail');
-Route::get('/product-category/{category_slug}',CategoryComponent::class)->name('product.category');
+Route::get('/product-category/{category_slug}/{scategory_slug?}',CategoryComponent::class)->name('product.category');
 Route::get('/search',SearchComponent::class)->name('product.search');
 Route::get('/wish-list',WishListComponent::class)->name('product.wishList');
 Route::get('/about-us',AboutUsComponent::class)->name('about-us');
@@ -128,4 +130,6 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('user/')->name('user.')-
     Route::get('order/{id}',UserOrderDetailsComponent::class )->name('orderDetails');
     Route::get('review/{id}',ReviewComponent::class )->name('orderReview');
     Route::get('change-password',ChangePassword::class )->name('changePassword');
+    Route::get('profile',ShowComponent::class )->name('profile');
+    Route::get('profile/edit',EditComponent::class )->name('edit-profile');
 });

@@ -83,6 +83,16 @@
                                     @error('category_id') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                                 <div class="form-group col-md-4">
+                                    <label for="sub_category">{{__('sub_category')}}</label>
+                                    <select class="form-control" name="sub_category_id" wire:model="sub_category_id">
+                                        <option> {{__('select_sub_category')}}</option>
+                                        @foreach ($subcategories as $sub_category)
+                                        <option value="{{$sub_category->id}}"> {{$sub_category->name}}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('sub_category_id') <span class="error">{{ $message }}</span> @enderror
+                                </div>
+                                <div class="form-group col-md-4">
                                     <label for="regular_price">{{__('regular_price')}}</label>
                                     <input type="number" step="any" min="0" class="form-control" id="regular_price"
                                         name="regular_price" wire:model="regular_price">

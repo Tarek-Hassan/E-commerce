@@ -167,7 +167,7 @@
                                         <td>
 
                                               
-                                                    <a href="{{route('user.orderDetails',['id'=>$item->id])}}"
+                                                    <a href="{{route('admin.orderDetails',['id'=>$item->id])}}"
                                                         data-toggle="tooltip" data-placement="top" title=""
                                                         data-original-title="edit">
                                                         <i class="fa fa-eye fa-2x text-success"></i>

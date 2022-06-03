@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Product;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -27,6 +28,7 @@ class EditProductComponent extends Component
     public $images;
     public $new_img;
     public $galary_images;
+    public $sub_category_id;
 
 
     public function mount($slug){
@@ -39,6 +41,7 @@ class EditProductComponent extends Component
             $this->slug=$this->product->slug;
             $this->stock_status=$this->product->stock_status;
             $this->category_id=$this->product->category_id;
+            $this->sub_category_id=$this->product->sub_category_id;
             $this->regular_price=$this->product->regular_price;
             $this->sale_price=$this->product->sale_price;
             $this->quantity=$this->product->quantity;
@@ -65,6 +68,7 @@ class EditProductComponent extends Component
             'SKU'=>'required',
             
             'category_id'=>'required',
+            'sub_category_id'=>'required',
             
             'stock_status'=>'required|in:instock,outofstock',
             'featured'=>'required',
@@ -93,6 +97,7 @@ class EditProductComponent extends Component
             
             'SKU.required'=>'SKU Is Required ',
             'category_id.required'=>'Category Is Required ',
+            'sub_category_id.required'=>'Sub Category Is Required ',
             
             'stock_status.required'=>'Stock Status Is Required ',
             'stock_status.in'=>'Stock Status Must be (In Stock or Out Of Stock)',
@@ -145,6 +150,7 @@ class EditProductComponent extends Component
 
         return view('livewire.admin.product.edit-product-component',[
             'categories'=>Category::all(),
+            'subcategories'=>SubCategory::where('category_id',$this->category_id)->get(),
         ])->layout('layouts.base');
     }
 }

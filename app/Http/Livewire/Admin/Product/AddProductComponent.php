@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Product;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\Product;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
@@ -15,7 +16,7 @@ class AddProductComponent extends Component
     public $name;
     public $slug;
     public $stock_status="instock";
-    public $category_id='select_Category';
+    public $category_id;
     public $regular_price=0;
     public $sale_price=0;
     public $quantity=0;
@@ -24,6 +25,7 @@ class AddProductComponent extends Component
     public $short_description;
     public $description;
     public $images;
+    public $sub_category_id;
 
     protected function rules(){
         return [
@@ -38,6 +40,7 @@ class AddProductComponent extends Component
             'stock_status'=>'required|in:instock,outofstock',
             'featured'=>'required',
             'category_id'=>'required',
+            'sub_category_id'=>'required',
             'quantity'=>'required|numeric|min:0',
         ];
     }
@@ -64,6 +67,7 @@ class AddProductComponent extends Component
             'SKU.required'=>'SKU Is Required ',
             
             'category_id.required'=>'Category Is Required ',
+            'sub_category_id.required'=>'Sub Category Is Required ',
             
             'stock_status.required'=>'Stock Status Is Required ',
             'stock_status.in'=>'Stock Status Must be (In Stock or Out Of Stock)',
@@ -105,7 +109,8 @@ class AddProductComponent extends Component
     {
 
         return view('livewire.admin.product.add-product-component',[
-            'categories'=>Category::all()
+            'categories'=>Category::all(),
+            'subcategories'=>SubCategory::where('category_id',$this->category_id)->get(),
         ])->layout('layouts.base');
     }
 }
