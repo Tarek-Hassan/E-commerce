@@ -71,7 +71,27 @@
                             <div class="stock-info in-stock">
                                 <p class="availability">Availability: <b>{{$item->stock_status}}</b></p>
                             </div>
-                            <div class="quantity">
+							<div>
+								@foreach ($item->attributes->unique('attribute_id') as $attr)
+								<div class="row" style="margin-top:20px;">
+									<div class="col-xs-2">
+										<p>{{$attr->attribute->name}}</p>
+									</div>
+									<div class="col-xs-10">
+										<select class="form-control" style="200px" wire:model="attr_values.{{$attr->attribute->name}}">
+											@foreach ( $attr->attribute->products->where('product_id',$item->id) as $pav)
+											<option value="{{$pav->value}}" >{{$pav->value}}</option>
+												
+											@endforeach
+
+										</select>
+									</div>
+
+								</div>
+									
+								@endforeach
+							</div>
+                            <div class="quantity" style="margin-top: 200px;">
                             	<span>Quantity:</span>
 								<div class="quantity-input">
 									<input type="text" name="product-quatity" value="1" wire:model="qty" data-max="120" pattern="[0-9]*" >
@@ -97,9 +117,6 @@
 							<div class="tab-contents">
 								<div class="tab-content-item active" id="description">
                                     <p>{!!$item->description!!}</p>
-									{{-- <p>Lorem ipsum dolor sit amet, an munere tibique consequat mel, congue albucius no qui, a t everti meliore erroribus sea. ro cum. Sea ne accusata voluptatibus. Ne cum falli dolor voluptua, duo ei sonet choro facilisis, labores officiis torquatos cum ei.</p>
-									<p>Cum altera mandamus in, mea verear disputationi et. Vel regione discere ut, legere expetenda ut eos. In nam nibh invenire similique. Atqui mollis ea his, ius graecis accommodare te. No eam tota nostrum eque. Est cu nibh clita. Sed an nominavi, et stituto, duo id rebum lucilius. Te eam iisque deseruisse, ipsum euismod his at. Eu putent habemus voluptua sit, sit cu rationibus scripserit, modus taria . </p>
-									<p>experian soleat maluisset per. Has eu idque similique, et blandit scriptorem tatibus mea. Vis quaeque ocurreret ea.cu bus  scripserit, modus voluptaria ex per.</p> --}}
 								</div>
 								<div class="tab-content-item " id="add_infomation">
 									<table class="shop_attributes">

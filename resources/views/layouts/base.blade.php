@@ -200,6 +200,9 @@
                                             <a title="Products" href="{{route('admin.products')}}">Products</a>
                                         </li>
                                         <li class="menu-item">
+                                            <a title="product Attributes" href="{{route('admin.attributes')}}">Product Attributes</a>
+                                        </li>
+                                        <li class="menu-item">
                                             <a title="Orders" href="{{route('admin.orders')}}">Orders</a>
                                         </li>
                                         <li class="menu-item">

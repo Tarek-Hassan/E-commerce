@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Product;
+use App\Models\Attribute;
+use App\Models\ProductAttribute;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 
@@ -16,7 +18,7 @@ class AddProductComponent extends Component
     public $name;
     public $slug;
     public $stock_status="instock";
-    public $category_id;
+    public $category_id=0;
     public $regular_price=0;
     public $sale_price=0;
     public $quantity=0;
@@ -26,6 +28,13 @@ class AddProductComponent extends Component
     public $description;
     public $images;
     public $sub_category_id;
+
+    public $attr;
+    public $inputs = [];
+    public $attribute_arr = [];
+    public $attribute_values;
+
+
 
     protected function rules(){
         return [
@@ -41,6 +50,7 @@ class AddProductComponent extends Component
             'featured'=>'required',
             'category_id'=>'required',
             'sub_category_id'=>'required',
+            
             'quantity'=>'required|numeric|min:0',
         ];
     }
@@ -73,6 +83,7 @@ class AddProductComponent extends Component
             'stock_status.in'=>'Stock Status Must be (In Stock or Out Of Stock)',
             
             'featured.required'=>'Featured Is Required ',
+       
             
             'quantity.required'=>'Quantity Is Required ',
             'quantity.numeric'=>'Quantity Must be Numeric ',
@@ -80,6 +91,21 @@ class AddProductComponent extends Component
         ];
     }
 
+
+    public function removeAttribute($index){
+        unset($this->inputs[$key]);
+        unset($this->attribute_arr[$key]);
+
+    }
+    
+    public function add(){
+
+       if(!in_array($this->attr,$this->attribute_arr)){
+           array_push($this->inputs,$this->attr);
+           array_push($this->attribute_arr,$this->attr);
+
+       }
+    }
 
     public function generateSlug(){
         $this->slug=Str::slug($this->name);
@@ -99,10 +125,24 @@ class AddProductComponent extends Component
                 }
             }
             $this->images=$image_names;
-           
+            
         }
-        Product::create($this->all());
-       return redirect()->route("admin.products")->with("success_message",__('created'));
+
+        $product=Product::create($this->all()); 
+
+        foreach ($this->attribute_values as $key => $attribute_value) {
+            $avalues=explode(',',$attribute_value);
+            foreach ($avalues as $avalue) {
+                ProductAttribute::create([
+                    'value'=>$avalue,
+                    'product_id'=>$product->id,
+                    'attribute_id'=>$key,
+
+                ]);
+            }
+        }
+
+        return redirect()->route("admin.products")->with("success_message",__('created'));
     }
 
     public function render()
@@ -110,6 +150,7 @@ class AddProductComponent extends Component
 
         return view('livewire.admin.product.add-product-component',[
             'categories'=>Category::all(),
+            'attributes'=>Attribute::all(),
             'subcategories'=>SubCategory::where('category_id',$this->category_id)->get(),
         ])->layout('layouts.base');
     }

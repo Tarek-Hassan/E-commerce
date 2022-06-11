@@ -10,7 +10,7 @@
                             <a href="{{route('admin.products')}}" class="nav-link active">{{__('products')}} </a>
                         </li>
                     </ul>
-                    <div class="table-responsive table-borderless">
+                    
                         <form action="" wire:submit.prevent="store" enctype="multipart/form-data">
 
                             <div class="row">
@@ -68,7 +68,7 @@
                                 <div class="form-group col-md-4">
                                     <label for="category">{{__('category')}}</label>
                                     <select class="form-control" name="category_id" wire:model.lazy="category_id">
-                                        <option> {{__('select_Category')}}</option>
+                                        <option value="0"> {{__('select_Category')}}</option>
                                         @foreach ($categories as $category)
                                         <option value="{{$category->id}}"> {{$category->name}}</option>
                                         @endforeach
@@ -78,7 +78,7 @@
                                 <div class="form-group col-md-4">
                                     <label for="sub_category">{{__('sub_category')}}</label>
                                     <select class="form-control" name="sub_category_id" wire:model.lazy="sub_category_id">
-                                        <option> {{__('select_sub_category')}}</option>
+                                        <option value="0"> {{__('select_sub_category')}}</option>
                                         @foreach ($subcategories as $sub_category)
                                         <option value="{{$sub_category->id}}"> {{$sub_category->name}}</option>
                                         @endforeach
@@ -120,14 +120,13 @@
                                     @error('featured') <span class="error">{{ $message }}</span> @enderror
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="form-group col-md-12" wire:ignore>
                                     <label for="short_description">{{__('short_description')}}</label>
                                     <textarea  class="form-control" id="short_description"
                                         name="short_description" wire:model="short_description"row="3"></textarea>
+                                    </div>
                                     @error('short_description') <span class="error">{{ $message }}</span> @enderror
-                                </div>
                             </div>
                         
                             <div class="row">
@@ -135,9 +134,43 @@
                                     <label for="description">{{__('description')}}</label>
                                     <textarea class="form-control " id="description"  name="description"
                                         wire:model="description" row="3"></textarea>
+                                    </div>
                                     @error('description') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-md-3">
+                                    <label for="attribute">{{__('attribute')}}</label>
+                                    <select class="form-control"   wire:model.lazy="attr">
+                                        <option> {{__('select_attribute')}}</option>
+                                        @foreach ($attributes as $attribute)
+                                            <option value="{{$attribute->id}}"> {{$attribute->name}}</option>
+                                        @endforeach
+                                    </select>
+                                   
+                                </div>
+
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-info mt-2" wire:click.prevent="add"> Add</button>
                                 </div>
                             </div>
+                            @foreach ($inputs as $key => $value )
+                                <div class="row">
+    
+                                    <div class="row col-md-5">
+                                        <label for="attributes">{{$attributes->where('id',$attribute_arr[$key])->first()->name}}</label>
+                                        <input type="text"class="form-control"  placeholder="{{$attributes->where('id',$attribute_arr[$key])->first()->name}}"
+                                            wire:model="attribute_values.{{$value}}">
+                                    
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="button" class="btn btn-info mt-2" wire:click.prevent="removeAttribute('{{$key}}')"> remove</button>
+                                    </div>
+                                    
+                                </div>
+                            @endforeach
+
+
 
 
                             <div class="row">
@@ -146,7 +179,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    
                 </div>
             </div>
         </div>

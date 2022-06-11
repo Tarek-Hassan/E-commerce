@@ -33,8 +33,9 @@ class ReviewComponent extends Component
 
     public function addReview(){
         $this->validate();
+     
 
-        $this->orderItem->reviews()->create($this->all());
+        $this->orderItem->review()->create($this->all());
         $this->orderItem->update([
             'status'=>true,
         ]);

@@ -7,20 +7,25 @@ use App\Models\Product;
 use Cart;
 use App\Models\SaleSetting;
 use Carbon\Carbon;
+use App\Models\ProductAttribute;
 
 class DetailsComponet extends Component
 {
     public $slug;
     public $qty;
+    public $attr_values ;
 
     public function mount($slug){
         $this->slug=$slug;
         $this->qty=1;
+        $this->attr_values = [];
 
     }
     public function store($id,$name,$price)
     {
-        Cart::instance('cart')->add($id,$name,$this->qty,$price)->associate(Product::class);
+        
+        
+        Cart::instance('cart')->add($id,$name,$this->qty,$price,$this->attr_values)->associate(Product::class);
         session()->flash('success_message',__('created'));
         return redirect()->route('product.cart');
     }
