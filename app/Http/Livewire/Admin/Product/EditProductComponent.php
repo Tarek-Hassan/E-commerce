@@ -60,8 +60,9 @@ class EditProductComponent extends Component
             $this->images=explode(',',$this->product->images);
 
 
-            $this->inputs=$this->product->attributes->where('product_id',$this->product->id)->unique('attribute_id')->pluck('attribute_id');
-            $this->attribute_arr=$this->product->attributes->where('product_id',$this->product->id)->unique('attribute_id')->pluck('attribute_id');
+            $this->inputs=$this->product->attributes->where('product_id',$this->product->id)->unique('attribute_id')->pluck('attribute_id')->toArray();
+            $this->attribute_arr=$this->product->attributes->where('product_id',$this->product->id)->unique('attribute_id')->pluck('attribute_id')->toArray();
+
             foreach ($this->attribute_arr as $arr) {
                 $attr_values=ProductAttribute::where('attribute_id',$arr)->where('product_id',$this->product->id)->get()->pluck('value');
                $values='';
@@ -132,7 +133,7 @@ class EditProductComponent extends Component
         ];
     }
 
-    public function removeAttribute($index){
+    public function removeAttribute($key){
         unset($this->inputs[$key]);
         unset($this->attribute_arr[$key]);
 
@@ -143,7 +144,6 @@ class EditProductComponent extends Component
        if(!in_array($this->attr,$this->attribute_arr)){
            array_push($this->inputs,$this->attr);
            array_push($this->attribute_arr,$this->attr);
-
        }
     }
     public function generateSlug(){
