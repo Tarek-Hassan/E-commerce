@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\OrderItem;
+use App\Models\ProductAttribute;
 
 
 class Product extends Model
@@ -27,6 +28,10 @@ class Product extends Model
     }
     public function orderItems(){
         return $this->hasMany(OrderItem::class,'product_id');
+    }
+
+    public function attributes(){
+        return $this->hasMany(ProductAttribute::class,'product_id');
     }
 
     public function status(){

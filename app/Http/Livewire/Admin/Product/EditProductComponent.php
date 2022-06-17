@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Product;
 use Illuminate\Support\Str;
+use App\Models\ProductAttribute;
+use App\Models\Attribute;
 use Livewire\WithFileUploads;
 
 class EditProductComponent extends Component
@@ -29,11 +31,17 @@ class EditProductComponent extends Component
     public $new_img;
     public $galary_images;
     public $sub_category_id;
+    public $attribute_ids;
+
+    public $attr;
+    public $inputs = [];
+    public $attribute_arr = [];
+    public $attribute_values = [];
 
 
     public function mount($slug){
         $this->product=Product::where('slug',$slug);
-
+        
         if($this->product->count() > 0){
             $this->product=$this->product->first();
             $this->image=$this->product->image;
@@ -50,6 +58,21 @@ class EditProductComponent extends Component
             $this->short_description=$this->product->short_description;
             $this->description=$this->product->description;
             $this->images=explode(',',$this->product->images);
+
+
+            $this->inputs=$this->product->attributes->where('product_id',$this->product->id)->unique('attribute_id')->pluck('attribute_id')->toArray();
+            $this->attribute_arr=$this->product->attributes->where('product_id',$this->product->id)->unique('attribute_id')->pluck('attribute_id')->toArray();
+
+            foreach ($this->attribute_arr as $arr) {
+                $attr_values=ProductAttribute::where('attribute_id',$arr)->where('product_id',$this->product->id)->get()->pluck('value');
+               $values='';
+               foreach ($attr_values as  $value) {
+                   $values .=$value.',';
+               }
+
+               $this->attribute_values[$arr] =rtrim($values,',');
+            }
+           
             
         }else{
             return redirect()->route("admin.products")->with('error_message',__('not_found'));
@@ -110,6 +133,19 @@ class EditProductComponent extends Component
         ];
     }
 
+    public function removeAttribute($key){
+        unset($this->inputs[$key]);
+        unset($this->attribute_arr[$key]);
+
+    }
+    
+    public function add(){
+
+       if(!in_array($this->attr,$this->attribute_arr)){
+           array_push($this->inputs,$this->attr);
+           array_push($this->attribute_arr,$this->attr);
+       }
+    }
     public function generateSlug(){
         $this->slug=Str::slug($this->name);
 
@@ -142,6 +178,23 @@ class EditProductComponent extends Component
             $this->images=implode(',',$this->images);
         }
         $this->product->update($this->all());
+        // 
+
+        ProductAttribute::where('product_id',$this->product->id)->delete();
+        foreach ($this->attribute_values as $key => $attribute_value) {
+            $avalues=explode(',',$attribute_value);
+            foreach ($avalues as $avalue) {
+                ProductAttribute::create([
+                    'value'=>$avalue,
+                    'product_id'=> $this->product->id,
+                    'attribute_id'=>$key,
+
+                ]);
+            }
+        }
+        // 
+      
+
         return redirect()->route("admin.products")->with('success_message',__('updated'));
     }
 
@@ -150,6 +203,7 @@ class EditProductComponent extends Component
 
         return view('livewire.admin.product.edit-product-component',[
             'categories'=>Category::all(),
+            'attributes'=>Attribute::all(),
             'subcategories'=>SubCategory::where('category_id',$this->category_id)->get(),
         ])->layout('layouts.base');
     }

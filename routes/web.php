@@ -47,6 +47,9 @@ use App\Http\Livewire\Admin\HomeCategory\HomeSaleSettingComponent;
 use App\Http\Livewire\Admin\HomeCategory\OrderComponent;
 use App\Http\Livewire\Admin\HomeCategory\OrderDetailsComponent;
 
+use App\Http\Livewire\Admin\ProductAttribute\AddAttributeComponent;
+ use App\Http\Livewire\Admin\ProductAttribute\ListAttributeComponent;
+ use App\Http\Livewire\Admin\ProductAttribute\EditAttributeComponent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,6 +112,12 @@ Route::middleware(['auth:sanctum','authAdmin','verified'])->prefix('admin/')->na
         Route::get('',ListCouponComponent::class )->name('coupons');
         Route::get('create',AddCouponComponent::class )->name('addcoupon');
         Route::get('edit/{id}',EditCouponComponent::class )->name('editcoupon');
+    });
+
+    Route::prefix('product-attributes/')->group(function(){
+        Route::get('',ListAttributeComponent::class )->name('attributes');
+        Route::get('create',AddAttributeComponent::class )->name('addAttributes');
+        Route::get('edit/{id}',EditAttributeComponent::class )->name('editAttributes');
     });
     // Route::prefix('home-category/')->group(function(){
 

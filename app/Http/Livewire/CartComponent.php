@@ -173,7 +173,6 @@ class CartComponent extends Component
             }
         }
 
-        // dd(Cart::instance('cart')->subtotal(),floatval(Cart::instance('cart')->subtotal()));
         $this->setAmountForCheckout();
         $most_viewed_product=Product::inRandomOrder()->limit(8)->get();
 

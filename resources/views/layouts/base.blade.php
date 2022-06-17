@@ -200,6 +200,9 @@
                                             <a title="Products" href="{{route('admin.products')}}">Products</a>
                                         </li>
                                         <li class="menu-item">
+                                            <a title="product Attributes" href="{{route('admin.attributes')}}">Product Attributes</a>
+                                        </li>
+                                        <li class="menu-item">
                                             <a title="Orders" href="{{route('admin.orders')}}">Orders</a>
                                         </li>
                                         <li class="menu-item">
@@ -399,7 +402,7 @@
             <div class="coppy-right-box">
                 <div class="container">
                     <div class="coppy-right-item item-left">
-                        <p class="coppy-right-text">Copyright © 2020 Surfside Media. All rights reserved</p>
+                        <p class="coppy-right-text">Copyright © {{date('Y')}} {{env('APP_NAME')}}. All rights reserved</p>
                     </div>
                     <div class="coppy-right-item item-right">
                         <div class="wrap-nav horizontal-nav">

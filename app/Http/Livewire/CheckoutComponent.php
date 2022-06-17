@@ -109,11 +109,17 @@ class CheckoutComponent extends Component
                     ]);
          
             foreach (Cart::instance('cart')->content() as $item) {
+                $options=NULL;
+                if($item->options){
+
+                    $options=serialize( $item->options);
+                }
                 OrderItem::create([
                     'order_id'=>$order->id,
                     'product_id'=>$item->id,
                     'quantity'=>$item->qty,
                     'price'=>$item->price,
+                    'options'=>$options,
                 ]);
                 # code...
             }
